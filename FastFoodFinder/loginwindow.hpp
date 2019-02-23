@@ -1,7 +1,7 @@
 #pragma once
 #include "accountType.hpp"
-#include "mainwindow.hpp"
 #include <QDialog>
+#include <QWidget>
 
 /*******************************************
  * class Login will be within namespace Ui.
@@ -20,7 +20,7 @@ class Login : public QDialog
 
     public:
         //Constructor
-        explicit Login(MainWindow*);
+        explicit Login(QWidget*);
 
         //Destructor
         ~Login();
@@ -46,5 +46,5 @@ private:
 
         static fastFoodFinder::AccountType type;    //The type of user(admin or foodie)
         Ui::Login* ui;                              //Pointer to namespace Ui for Login info
-        MainWindow* windowAfterLogin;               //Pointer so that MainWindow appears after successful login
+        QWidget* windowAfterLogin;               //Pointer so that MainWindow appears after successful login
 };

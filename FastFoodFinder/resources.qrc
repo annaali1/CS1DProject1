@@ -2,6 +2,7 @@
     <qresource prefix="/">
         <file>admin.png</file>
         <file>hamburgercopy.jpg</file>
+        <file>eatALLthefood.jpg</file>
         <file>loginInfo.txt</file>
     </qresource>
 </RCC>

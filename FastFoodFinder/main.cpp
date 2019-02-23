@@ -8,7 +8,7 @@ int main(int argc, char *argv[])
 {
     //This sets the screen scale to whatever resolution the moniter is. If your screen size is too large for the login or main
     //window, I reccoment commenting this out. Its because my screen is 4K
-    qputenv("QT_AUTO_SCREEN_SCALE_FACTOR", "1");
+    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
     //Declare the application with the arguments
     QApplication a(argc, argv);
