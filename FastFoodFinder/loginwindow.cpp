@@ -9,7 +9,7 @@
 fastFoodFinder::AccountType Login::type = fastFoodFinder::AccountType::FOODIE;
 
 //Constructor will initialize the main window and login screen with appropriate spacing and images
-Login::Login(MainWindow* window)
+Login::Login(QWidget* window)
     : QDialog(nullptr), ui(new Ui::Login), windowAfterLogin(window)
 {
     ui->setupUi(this);

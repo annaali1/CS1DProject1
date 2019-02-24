@@ -19,6 +19,15 @@ class MainWindow : public QMainWindow
         explicit MainWindow(QWidget *parent = nullptr);
         ~MainWindow();
 
+    private slots:
+        //These slots will register from the home screen if each push button has been clicked
+        //and redirect them to the appropriate stack widget
+        void on_ListButton_clicked();
+        void on_PlanTripButton_clicked();
+        void on_ViewPlansButton_clicked();
+        void on_AdminButton_clicked();
+        void on_HomeScreenButton_clicked();
+
     private:
         Ui::MainWindow *ui;
         QString currentFile; // Directory of the file containing restaurants currently loaded into the program
