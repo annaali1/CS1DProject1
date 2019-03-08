@@ -1,0 +1,320 @@
+Name of Fast Food restaurant: MacDonald's
+Fast Food restaurant number 1
+
+ 0.0
+ 13.2
+ 15.4
+ 11.5
+ 13.3
+ 15.2
+ 5.8
+ 6.9
+ 8.56
+ 3.5
+8 miles to Saddleback College 
+8 menu items
+Big Mac
+3.99
+French Fries
+2.95
+Hamburger
+1.79
+Double Cheeseburger
+4.29
+Cheeseburger
+2.29
+Quarter Pounder with Cheese
+4.99
+Filet-O-Fish
+3.33
+McRib
+4.97
+
+Name of Fast Food restaurant: Chipotle
+Fast Food restaurant number 2
+
+ 13.2
+ 0.0
+ 15.1
+ 14.8
+ 0.1
+ 4.2
+ 10.3
+ 9.3
+ 5.2
+ 11.0
+4.29 miles to Saddleback College 
+6 menu items
+Veggie taco
+5.99
+Veggie burrito
+7.99
+Steak taco
+3.99
+Steak burrito
+8.99
+Chicken taco
+4.99
+Chicken burrito
+6.99
+
+Name of Fast Food restaurant: Domino's Pizza
+Fast Food restaurant number 3
+ 
+ 15.4
+ 15.1
+ 0.0
+ 4.3
+ 16.1
+ 14.3
+ 18.4
+ 18.3
+ 17.2
+ 17.2
+12.41 miles to Saddleback College 
+5 menu items
+Veggie pizza
+9.99
+Pepperoni pizza 
+8.99
+All meat pizza
+12.99
+Cheese pizza
+5.99
+Mushroom and pepperoni pizza 
+7.99
+ 
+Name of Fast Food restaurant: KFC
+Fast Food restaurant number 4
+  
+ 11.5
+ 14.8
+ 4.3
+ 0.0
+ 8.1
+ 9.4
+ 14.4
+ 14.3
+ 13.2
+ 13.2
+7.56 miles to Saddleback College 
+4 menu items
+Three piece original fried chicken  
+6.99
+Bucket of crispy fried chicken  
+13.99
+Mashed potatoes
+5.99
+Cole slaw
+5.99
+ 
+
+Name of Fast Food restaurant: Subway
+Fast Food restaurant number 5
+
+ 13.3
+ 0.1
+ 16.1
+ 8.1
+ 0.0
+ 4.5
+ 8.5
+ 8.4
+ 5.2
+ 12.1
+2.67 miles to Saddleback College 
+4 menu items
+Veggie sandwich
+4.99
+Tuna sandwich
+6.99
+Italian sandwich
+7.99
+Turkey sandwich
+5.99
+
+Name of Fast Food restaurant: In-N-Out Burger
+Fast Food restaurant number 6
+ 
+ 15.2
+ 4.2
+ 14.3
+ 9.4
+ 4.5
+ 0.0
+ 8.56
+ 11.1
+ 5.1
+ 14.2
+5.94 miles to Saddleback College 
+5 menu items
+Hamburger
+2.99
+Cheeseburger
+3.29
+Milk shake
+2.99
+French fries
+1.79
+Medium coke
+2.35
+
+
+
+Name of Fast Food restaurant: Wendy's
+Fast Food restaurant number 7
+
+ 5.8
+ 10.3
+ 18.4
+ 14.4
+ 8.5
+ 8.56
+ 0.0
+ 0.7
+ 5.8
+ 4.0
+8.44 miles to Saddleback College 
+5 menu items
+Hamburger
+3.99
+Cheeseburger
+4.29
+Small classic chocolate Frosty
+2.99
+French fries
+1.79
+Chicken wrap
+4.39
+
+Name of Fast Food restaurant: Jack in the Box
+Fast Food restaurant number 8
+
+ 6.9
+ 9.3
+ 18.7
+ 14.3
+ 8.4
+ 11.1
+ 0.7
+ 0.0
+ 5.7
+ 4.7
+12.75 miles to Saddleback College
+4 menu items
+Chicken club salad  
+6.99
+Southwest chicken salad  
+7.29
+Grilled chicken salad
+5.99
+Side salad
+1.79
+ 
+Name of Fast Food restaurant: El Pollo Loco
+Fast Food restaurant number 9
+
+ 8.56
+ 5.2
+ 17.2
+ 13.2
+ 5.2
+ 5.1
+ 5.8
+ 5.7
+ 0.0
+ 9.5
+9.19 miles to Saddleback College 
+3 menu items
+Monterrey pollo salad
+6.99
+Steamed vegetables
+3.29
+Chicken tortilla soup
+5.29
+ 
+
+Name of Fast Food restaurant: Papa John's Pizza
+Fast Food restaurant number 10
+
+ 3.5
+ 11.0
+ 17.2
+ 13.2
+ 12.1
+ 14.2
+ 4.0
+ 4.7
+ 9.5
+ 0.0
+14.54 miles to Saddleback College 
+5 menu items
+Veggie pizza
+4.09
+Pepperoni pizza 
+8.99
+All meat pizza
+12.99
+Cheese pizza
+5.99
+Mushroom and pepperoni pizza 
+6.99
+ 
+Name of Fast Food restaurant: Pizza Hut
+Fast Food restaurant number 11
+
+11.5
+14.2
+13.4
+16.5
+3.3
+12.2
+7.8
+6.9
+8.2
+6.11
+0.0
+5.8
+10.1 miles to Saddleback College
+6 menu items
+Veggie pizza
+4.99
+Pepperoni pizza
+8.99
+All meat pizza
+12.99
+Cheese pizza
+5.99
+Mushroom and pepperoni pizza
+6.99
+Mushroom and green pepper pizza
+7.29
+
+
+Name of Fast Food restaurant: Sonic
+Fast Food restaurant number 12
+
+13.8
+4.4
+18.1
+18.8
+0.8
+8.2
+10.8
+9.4
+5.5
+11.8
+5.8
+0.0
+6.6 miles to Saddleback College
+5 menu items
+Sonic hamburger
+4.99
+Sonic cheeseburger
+4.29
+New York dog
+2.89
+French fries
+1.79
+Medium Pepsi
+2.55
