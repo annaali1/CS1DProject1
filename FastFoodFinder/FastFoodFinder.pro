@@ -27,12 +27,16 @@ CONFIG += c++14
 SOURCES += \
     main.cpp \
     MainWindow.cpp \
-    loginwindow.cpp
+    loginwindow.cpp \
+    Restaurant.cpp \
+    Plan.cpp
 
 HEADERS += \
     accountType.hpp \
     loginwindow.hpp \
-    MainWindow.hpp
+    MainWindow.hpp \
+    Restaurant.h \
+    Plan.h
 
 FORMS += \
     mainwindow.ui \
