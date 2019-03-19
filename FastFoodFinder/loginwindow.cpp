@@ -2,11 +2,12 @@
 #include <QFile>
 #include <QTextStream>
 #include <QtDebug>
+#include <iostream>
 #include "loginwindow.hpp"
 #include "ui_loginwindow.h"
 
 //Initialize type to foodie at start of implementation, otherwise its an unreferenced type
-fastFoodFinder::AccountType Login::type = fastFoodFinder::AccountType::FOODIE;
+fastFoodFinder::AccountType Login::type = fastFoodFinder::AccountType::ADMIN;
 
 //Constructor will initialize the main window and login screen with appropriate spacing and images
 Login::Login(QWidget* window)
@@ -32,11 +33,10 @@ void Login::on_pushButton_registered_clicked()
 {
     QString usernameInput = ui->lineEdit_username->text();
     QString passwordInput = ui->lineEdit_password->text();
-    fastFoodFinder::AccountType type;
 
-    if(authenticate(usernameInput, passwordInput, type))
+    if(authenticate(usernameInput, passwordInput))
     {
-        authSuccessful(type);
+        authSuccessful(Login::getType());
     }
     else
     {
@@ -45,7 +45,7 @@ void Login::on_pushButton_registered_clicked()
 }
 
 //Method authenticate will check the username and password and the type
-bool Login::authenticate(QString usernameInput, QString passwordInput, fastFoodFinder::AccountType& type) const
+bool Login::authenticate(QString usernameInput, QString passwordInput) const
 {
     //Sets the file to be read to our login info
     QFile authFile(":/loginInfo.txt");

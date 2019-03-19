@@ -26,7 +26,7 @@ class Login : public QDialog
         ~Login();
 
         //Public function to return type of user
-        fastFoodFinder::AccountType getType();
+        static fastFoodFinder::AccountType getType();
 
     private slots:
         //Checks if the push button has been clicked or not
@@ -36,7 +36,7 @@ class Login : public QDialog
 
 private:
         //Method authenticate is used when the program checks if an admin username or password as been entered
-        bool authenticate(QString username, QString password, fastFoodFinder::AccountType&) const;
+        bool authenticate(QString username, QString password) const;
 
         //Method authSuccessful will output that the login was accepted and transition to the main window
         void authSuccessful(fastFoodFinder::AccountType) const;

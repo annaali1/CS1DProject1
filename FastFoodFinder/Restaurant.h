@@ -28,15 +28,19 @@ class Restaurant
         Restaurant();
         Restaurant(string name);
         list<Restaurant> PopRestaurantList();
+        list<Restaurant> PopRestaurantListFromFile(string filename);
         void editMenu();//******************
-        string getrName();//***************
+        string getrName();
+        string getsDistance();
+        int getId();
         bool IsEmpty();
         void addMenu();//*********************
         void deleteMenu();//*************
         void addRestaurant(list<Restaurant> &r1); //adds restaurant to list
-        void removeRestaurant(list<Restaurant> &r1);
+        void removeRestaurant(list<Restaurant> &r1); //removes restaurant from list
         void setName(string newName);
         void setId(int newId);
-        void setDistance(string distance);
+        void setDistances(vector<double> distanceVec);
         void setNumberMenuItems(int menuItems);
+        void setMenuItems(vector<menu> newMenues);
 };
