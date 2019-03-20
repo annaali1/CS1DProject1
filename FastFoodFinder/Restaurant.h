@@ -19,7 +19,7 @@ class Restaurant
     private:
         vector<menu> menuItems;
         vector<double> distance;
-        string sDistance;
+        double sDistance;
         string rName;
         string stringid;
         int id;
@@ -27,11 +27,11 @@ class Restaurant
     public:
         Restaurant();
         Restaurant(string name);
-        list<Restaurant> PopRestaurantList();
+        list<Restaurant> PopRestaurantList(string file);
         list<Restaurant> PopRestaurantListFromFile(string filename);
         void editMenu();//******************
         string getrName();
-        string getsDistance();
+        double getsDistance();
         int getId();
         bool IsEmpty();
         void addMenu();//*********************

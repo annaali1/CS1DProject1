@@ -1,17 +1,18 @@
 #include "Restaurant.h"
-
+#include <QFileDialog>
+#include <QWidget>
 Restaurant::Restaurant()
 {
     rName = "";
     id = 0;
-    sDistance = "";
+    sDistance = 0;
 }
 
 Restaurant::Restaurant(string name)
 {
     rName = name;
     id = 0;
-    sDistance = "";
+    sDistance = 0;
 }
 
 //void Restaurant::editMenu()
@@ -109,13 +110,13 @@ Restaurant::Restaurant(string name)
 //}
 
 //This method will pop the restaurant list using a file SPECIFIC to the user
-list<Restaurant> Restaurant::PopRestaurantList()
+list<Restaurant> Restaurant::PopRestaurantList(string file)
 {
     list<Restaurant> r1;
-    string file = "C:/Users/lukes/OneDrive/Desktop/CS1DProject1/FastFoodFinder/restaurants.txt";
+    //string file = "C:/Users/lukes/OneDrive/Desktop/CS1DProject1/FastFoodFinder/restaurants.txt";
     ifstream inFile;
     double d = 0.0, doublePrice;
-    string menItems, dist, item, dprice;
+    string menItems, dist, item, dprice, saddle_distance;
     menu m;
     m.name =  "";
     m.price = 0.0;
@@ -150,7 +151,9 @@ list<Restaurant> Restaurant::PopRestaurantList()
             convertDist >> d;
             temp->distance.push_back(d);
         }
-        inFile >> temp->sDistance;
+        inFile >> saddle_distance;
+        stringstream convertSDistance(saddle_distance);
+        convertSDistance >> temp->sDistance;
         inFile.ignore(1000, '\n');
         inFile >> menItems;
         stringstream convertNo(menItems);
@@ -312,7 +315,7 @@ string Restaurant::getrName()
    return rName;
 }
 
-string Restaurant::getsDistance()
+double Restaurant::getsDistance()
 {
     return sDistance;
 }

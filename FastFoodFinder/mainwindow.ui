@@ -448,7 +448,7 @@
      <number>2</number>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>6</number>
     </property>
     <widget class="QWidget" name="homePage">
      <widget class="QLabel" name="home_label">
@@ -466,7 +466,7 @@
      </widget>
     </widget>
     <widget class="QWidget" name="restaurantListPage">
-     <widget class="QPushButton" name="editPlan_button_2">
+     <widget class="QPushButton" name="viewMenuButton">
       <property name="geometry">
        <rect>
         <x>320</x>
@@ -476,7 +476,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>Edit Plan</string>
+       <string>View Menu</string>
       </property>
      </widget>
      <widget class="QListWidget" name="restaurants_listWidget">
@@ -489,30 +489,20 @@
        </rect>
       </property>
      </widget>
-     <widget class="QPushButton" name="loadPlan_button_2">
+     <widget class="QLabel" name="label_3">
       <property name="geometry">
        <rect>
-        <x>180</x>
-        <y>20</y>
-        <width>131</width>
-        <height>51</height>
+        <x>50</x>
+        <y>25</y>
+        <width>221</width>
+        <height>41</height>
        </rect>
       </property>
-      <property name="text">
-       <string>Load Plan</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="deletePlan_button_2">
-      <property name="geometry">
-       <rect>
-        <x>40</x>
-        <y>20</y>
-        <width>131</width>
-        <height>51</height>
-       </rect>
+      <property name="styleSheet">
+       <string notr="true">font: 87 12pt &quot;Arial Black&quot;;</string>
       </property>
       <property name="text">
-       <string>Delete Plan</string>
+       <string>Restaurant List</string>
       </property>
      </widget>
     </widget>
@@ -563,7 +553,7 @@
        <string>Restaurants In Plan</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="AddRestButton">
+     <widget class="QPushButton" name="AddRestPlanButton">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -573,10 +563,10 @@
        </rect>
       </property>
       <property name="text">
-       <string>Add Restaurant</string>
+       <string>Add Restaurant to Plan</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="removeRestaurantButton">
+     <widget class="QPushButton" name="removeRestaurantPlanButton">
       <property name="geometry">
        <rect>
         <x>250</x>
@@ -587,7 +577,8 @@
       </property>
       <property name="text">
        <string>Remove
-Restaurant</string>
+Restaurant
+From Plan</string>
       </property>
      </widget>
      <widget class="QPushButton" name="editMenuItemButton">
@@ -655,7 +646,83 @@ Restaurant</string>
       </property>
      </widget>
     </widget>
-    <widget class="QWidget" name="maintanencePage"/>
+    <widget class="QWidget" name="maintanencePage">
+     <widget class="QListWidget" name="maintenance_listWidget">
+      <property name="geometry">
+       <rect>
+        <x>200</x>
+        <y>20</y>
+        <width>256</width>
+        <height>371</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="AddRestButton">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>20</y>
+        <width>121</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Add Restaurant</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="removeRestaurantButton">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>79</y>
+        <width>121</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Remove Restaurants</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_3">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>140</y>
+        <width>121</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Edit Menu Items</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_4">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>199</y>
+        <width>121</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Add Menu Items</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_5">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>260</y>
+        <width>121</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Remove Menu Items</string>
+      </property>
+     </widget>
+    </widget>
     <widget class="QWidget" name="addRestaurantPage"/>
     <widget class="QWidget" name="removeRestaurantPage">
      <widget class="QLabel" name="label_RemovePrompt">
@@ -721,6 +788,16 @@ Restaurant</string>
       </property>
       <property name="text">
        <string>Cancel</string>
+      </property>
+     </widget>
+     <widget class="QListWidget" name="maintenanceR_listWidget">
+      <property name="geometry">
+       <rect>
+        <x>210</x>
+        <y>40</y>
+        <width>256</width>
+        <height>301</height>
+       </rect>
       </property>
      </widget>
     </widget>

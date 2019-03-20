@@ -23,6 +23,7 @@ class MainWindow : public QMainWindow
     public:
         explicit MainWindow(QWidget *parent = nullptr);
         ~MainWindow();
+        list<Restaurant> getRestaurantList();
 
     private slots:
         //These slots will register from the home screen if each push button has been clicked
