@@ -3,7 +3,9 @@
 #include<QMainWindow>
 #include <QMessageBox>
 #include <QListWidget>
+#include <QFileDialog>
 #include "Restaurant.h"
+#include "loginwindow.hpp"
 
 /*****************************************************
  * Class MainWindow will be within the Ui namespace
@@ -21,12 +23,17 @@ class MainWindow : public QMainWindow
     public:
         explicit MainWindow(QWidget *parent = nullptr);
         ~MainWindow();
+        list<Restaurant> getRestaurantList();
 
     private slots:
         //These slots will register from the home screen if each push button has been clicked
         //and redirect them to the appropriate stack widget
         void on_ListButton_clicked();
         void on_PlanTripButton_clicked();
+        void on_AddRestButton_clicked();
+        void on_removeRestaurantButton_clicked();
+        void on_confirmButton_clicked();
+        void on_cancelButton_clicked();
         void on_ViewPlansButton_clicked();
         void on_AdminButton_clicked();
         void on_HomeScreenButton_clicked();
@@ -38,5 +45,6 @@ class MainWindow : public QMainWindow
         // Setup the menus and widgets in the window
         void setupMenusAndWidgets();
         void DisplayRestaurant(QListWidget *list);
+        void UpdateRestaurants(QListWidget *list);
 
 };

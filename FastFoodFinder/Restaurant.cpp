@@ -1,17 +1,18 @@
 #include "Restaurant.h"
-
+#include <QFileDialog>
+#include <QWidget>
 Restaurant::Restaurant()
 {
     rName = "";
     id = 0;
-    sDistance = "";
+    sDistance = 0;
 }
 
 Restaurant::Restaurant(string name)
 {
     rName = name;
     id = 0;
-    sDistance = "";
+    sDistance = 0;
 }
 
 //void Restaurant::editMenu()
@@ -108,10 +109,84 @@ Restaurant::Restaurant(string name)
 //    cout << endl;
 //}
 
-list<Restaurant> Restaurant::PopRestaurantList()
+//This method will pop the restaurant list using a file SPECIFIC to the user
+list<Restaurant> Restaurant::PopRestaurantList(string file)
 {
     list<Restaurant> r1;
-    string file = "C:/Users/lukes/OneDrive/Desktop/CS1DProject1/FastFoodFinder/restaurants.txt";
+    //string file = "C:/Users/lukes/OneDrive/Desktop/CS1DProject1/FastFoodFinder/restaurants.txt";
+    ifstream inFile;
+    double d = 0.0, doublePrice;
+    string menItems, dist, item, dprice, saddle_distance;
+    menu m;
+    m.name =  "";
+    m.price = 0.0;
+
+    inFile.open(file);
+    while(!inFile.eof()){
+        Restaurant *temp = new Restaurant;
+        inFile.ignore(1000, 'N');
+        inFile.ignore(1000, ':');
+        inFile.ignore(1);
+        getline(inFile, temp->rName);
+
+        if (!temp->rName.empty() && temp->rName[temp->rName.size() - 1] == '\r')
+        {
+            temp->rName.erase(temp->rName.size() - 1);
+        }
+        inFile.clear();
+        inFile.ignore(28);
+        getline(inFile, temp->stringid);
+        if (!temp->stringid.empty() && temp->stringid[temp->stringid.size() - 1] == '\r')
+        {
+           temp->stringid.erase(temp->stringid.size() - 1);
+        }
+        stringstream convertID(temp->stringid);
+        convertID >> temp->id;
+        for(int i = 0; i < 10; i++)
+        {
+
+            inFile.ignore(1);
+            inFile >> dist;
+            stringstream convertDist(dist);
+            convertDist >> d;
+            temp->distance.push_back(d);
+        }
+        inFile >> saddle_distance;
+        stringstream convertSDistance(saddle_distance);
+        convertSDistance >> temp->sDistance;
+        inFile.ignore(1000, '\n');
+        inFile >> menItems;
+        stringstream convertNo(menItems);
+        convertNo >> temp->NoOfMenuItems;
+        for(int i = 0; i < temp->NoOfMenuItems; i++)
+        {
+            inFile.ignore(1000, '\n');
+            getline(inFile, item);
+            if (!item.empty() && item[item.size() - 1] == '\r')
+            {
+                item.erase(item.size() - 1);
+            }
+            inFile >> dprice;
+            stringstream convertPrice(dprice);
+            convertPrice >> doublePrice;
+            m = {item, doublePrice};
+            temp->menuItems.push_back(m);
+        }
+        if(inFile.fail())
+        {
+            break;
+        }
+        r1.push_back(*temp);
+    delete temp;
+    }
+    inFile.close();
+return r1;
+}
+
+//This method will pop the restaurants from a given file by taking in a string for the filename
+list<Restaurant> Restaurant::PopRestaurantListFromFile(string file)
+{
+    list<Restaurant> r1;
     ifstream inFile;
     double d = 0.0, doublePrice;
     string menItems, dist, item, dprice;
@@ -234,12 +309,51 @@ return r1;
 // r1.erase(it);
 //}
 
+
 string Restaurant::getrName()
 {
    return rName;
 }
 
+double Restaurant::getsDistance()
+{
+    return sDistance;
+}
+
+int Restaurant::getId()
+{
+    return id;
+}
+
 bool Restaurant::IsEmpty()
 {
     return (rName == "");
+}
+
+void Restaurant::setName(string newName)
+{
+    rName = newName;
+}
+
+void Restaurant::setId(int newId)
+{
+    id = newId;
+}
+
+void Restaurant::setDistances(vector<double> distanceVec)
+{
+    for(double i = 0; i <= distanceVec.size(); i++)
+    {
+        distance.swap(distanceVec);
+    }
+}
+
+void Restaurant::setNumberMenuItems(int menuItems)
+{
+    NoOfMenuItems = menuItems;
+}
+
+void Restaurant::setMenuItems(vector<menu> newMenues)
+{
+    menuItems.swap(newMenues);
 }
