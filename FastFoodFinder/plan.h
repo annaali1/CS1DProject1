@@ -1,6 +1,6 @@
 #ifndef PLAN_H
 #define PLAN_H
-#include "Restaurant.h"
+#include "mainwindow.hpp"
 
 
 class Plan
@@ -9,7 +9,9 @@ public:
     Plan();
 
 private:
-    vector<Restaurant> plan;
+    queue<Restaurant> plan;
+    double totalDistance;
+    double totalRevenue;
 };
 
 #endif // PLAN_H

@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <fstream>
 #include <vector>
+#include <queue>
 #include <sstream>
 #include <QString>
 #include <string>

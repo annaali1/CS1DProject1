@@ -2,5 +2,7 @@
 
 Plan::Plan()
 {
+    list<Restaurant> list;
+
 
 }

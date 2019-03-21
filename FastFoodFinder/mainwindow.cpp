@@ -42,6 +42,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //Set the default page upon opening the main window to the home page
     ui->buttonList->setCurrentWidget(ui->homePage);
+
+    ui->restaurants_listWidget_PlanTrip->setSelectionMode(QAbstractItemView::ExtendedSelection);
+
 }
 
 //Default destructor
@@ -131,16 +134,82 @@ void MainWindow::on_AddRestButton_clicked()
         //Output that the restaurants have been added successfully
         QMessageBox::information(this, tr("SUCCESS"), tr("Restaurants have been added successfully!"));
 
-        //Since we now have a new list, call UpdateRestaurants to update the list and plan trip widgets with new data
-        UpdateRestaurants(ui->restaurants_listWidget);
-        UpdateRestaurants(ui->restaurants_listWidget_PlanTrip);
-        UpdateRestaurants(ui->maintenance_listWidget);
-        UpdateRestaurants(ui->maintenanceR_listWidget);
+        //Since we now have a new list, update the list and plan trip widgets with new data
+        for (std::list<Restaurant>::iterator it = tempList.begin(); it != tempList.end(); it++)
+        {
+            if(it->IsEmpty())
+            {
+                QMessageBox::information(this,tr("The Restaurant is Empty"), tr("some thing went wrong and the item was not saved"));
+                break;
+            }
+            else
+            {
+                ui->restaurants_listWidget_PlanTrip->addItem(QString::fromStdString(it->getrName()));
+                ui->restaurants_listWidget->addItem(QString::fromStdString(it->getrName()));
+                ui->maintenance_listWidget->addItem(QString::fromStdString(it->getrName()));
+                ui->maintenanceR_listWidget->addItem(QString::fromStdString(it->getrName()));
+            }
+        }
     }
     else
     {
       //If all else is false, then the user is not an admin.
       QMessageBox::information(this, tr("ERROR"), tr("You must be an admin to add, remove, or edit restaurants!"));
+    }
+}
+
+//This method will add a restaurant from the available restaurants page to the restaurants in plan page
+void MainWindow::on_AddRestPlanButton_clicked()
+{
+    //Check and make sure that there are restaurants selected
+    if(ui->restaurants_listWidget_PlanTrip->selectedItems().count() < 1)
+    {
+        //If not, output an error message
+        QMessageBox::information(this, tr("ERROR"), tr("No restaurants have been selected, please try again!"));
+    }
+    else
+    {
+        //Set the current item equal to the first item in the widget
+        QListWidgetItem *current = ui->restaurants_listWidget_PlanTrip->currentItem();
+        //Set the current index equal to the first row, same as doing currIndex = 0
+        int currIndex = ui->restaurants_listWidget_PlanTrip->row(current);
+
+        //Set the next pointer to increment the rows by 1
+        QListWidgetItem *next = ui->restaurants_listWidget_PlanTrip->
+                                item(ui->restaurants_listWidget_PlanTrip->row(current) + 1);
+        //Initialize count and index
+        int count;
+        int index = 0;
+
+        //Count is initialized to the number of restaurants available
+        count = ui->restaurants_listWidget_PlanTrip->count();
+
+        //Declare our item variable to add
+        QListWidgetItem *item;
+
+        //Makes sure that we will never add more than we have in the list
+        while(index < count)
+        {
+            //Adds the selected restaurant to the current plan widget, removes it from the available restaurants
+            if(ui->restaurants_listWidget_PlanTrip->currentItem()->isSelected())
+            {
+                item = ui->restaurants_listWidget_PlanTrip->takeItem(currIndex);
+                ui->restaurantInPlan_listWidget->addItem(item);
+
+            }
+            else
+            {
+                //If not selected, move on to the next row
+                current = next;
+            }
+
+            //Increment the index
+            index++;
+        }
+
+        //Update the widgets
+        ui->restaurantInPlan_listWidget->update();
+        ui->restaurants_listWidget_PlanTrip->update();
     }
 }
 
@@ -164,6 +233,48 @@ void MainWindow::on_removeRestaurantButton_clicked()
        QMessageBox::information(this, tr("ERROR"), tr("You must be an admin to add, remove, or edit restaurants!"));
     }
 
+}
+
+//This method removes the restaurant from the 'current restaurants in plan' widget
+void MainWindow::on_removeRestaurantPlanButton_clicked()
+{
+    //Checks if there are items in the widget, if it is empty, output an error message
+    if(ui->restaurantInPlan_listWidget->selectedItems().count() < 1)
+    {
+        QMessageBox::information(this, tr("ERROR"), tr("No restaurants have been selected to remove, please try again!"));
+    }
+    else
+    {
+        //Set the first item in the widget to current
+        QListWidgetItem *current = ui->restaurantInPlan_listWidget->currentItem();
+        //Set current index equal to the row of the current item, this is the same as saying currIndex = 0;
+        int currIndex = ui->restaurantInPlan_listWidget->row(current);
+
+        //Set the next pointer equal to the next row(next element) of the widget
+        QListWidgetItem *next = ui->restaurantInPlan_listWidget->
+                                item(ui->restaurantInPlan_listWidget->row(current) + 1);
+
+        //Declare our item pointer to store the desired item to remove
+        QListWidgetItem *item;
+
+        if(ui->restaurantInPlan_listWidget->currentItem()->isSelected())
+        {
+            //If the desired item is selected, remove it from the current plan widget
+            item = ui->restaurantInPlan_listWidget->takeItem(currIndex);
+            //Store the item into the available restaurants widget
+            ui->restaurants_listWidget_PlanTrip->addItem(item);
+        }
+        else
+        {
+            //If not found, go to next row
+            current = next;
+        }
+
+        //Update the widgets to show changes
+        ui->restaurantInPlan_listWidget->update();
+        ui->restaurants_listWidget_PlanTrip->update();
+
+    }
 }
 
 //If confirm button is clicked, then the restaurant submitted in the line edit will be removed
@@ -203,6 +314,10 @@ void MainWindow::on_confirmButton_clicked()
         {
             lEdit->clear();
         }
+
+        //If a restaurant was removed, clear the restaurants in plan widget to avoid invalid input
+        ui->restaurantInPlan_listWidget->clear();
+
     }
     else
     {
