@@ -4,6 +4,7 @@
 #include <QMessageBox>
 #include <QListWidget>
 #include <QFileDialog>
+#include <menuscreen.h>
 #include "Restaurant.h"
 #include "loginwindow.hpp"
 
@@ -40,8 +41,11 @@ class MainWindow : public QMainWindow
         void on_AdminButton_clicked();
         void on_HomeScreenButton_clicked();
 
-    private:
+        void on_viewMenuButton_clicked();
+
+private:
         Ui::MainWindow *ui;
+
         QString currentFile; // Directory of the file containing restaurants currently loaded into the program
         list<Restaurant> restaurantList;
         // Setup the menus and widgets in the window

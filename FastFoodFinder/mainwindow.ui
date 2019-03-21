@@ -148,6 +148,15 @@
        </color>
       </brush>
      </colorrole>
+     <colorrole role="PlaceholderText">
+      <brush brushstyle="NoBrush">
+       <color alpha="128">
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
+       </color>
+      </brush>
+     </colorrole>
     </active>
     <inactive>
      <colorrole role="WindowText">
@@ -282,6 +291,15 @@
         <red>0</red>
         <green>0</green>
         <blue>0</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="PlaceholderText">
+      <brush brushstyle="NoBrush">
+       <color alpha="128">
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
        </color>
       </brush>
      </colorrole>
@@ -422,6 +440,15 @@
        </color>
       </brush>
      </colorrole>
+     <colorrole role="PlaceholderText">
+      <brush brushstyle="NoBrush">
+       <color alpha="128">
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
+       </color>
+      </brush>
+     </colorrole>
     </disabled>
    </palette>
   </property>
@@ -448,7 +475,7 @@
      <number>2</number>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="homePage">
      <widget class="QLabel" name="home_label">
@@ -512,7 +539,7 @@
        <rect>
         <x>10</x>
         <y>40</y>
-        <width>151</width>
+        <width>201</width>
         <height>271</height>
        </rect>
       </property>
@@ -520,9 +547,9 @@
      <widget class="QListWidget" name="restaurantInPlan_listWidget">
       <property name="geometry">
        <rect>
-        <x>170</x>
+        <x>260</x>
         <y>40</y>
-        <width>141</width>
+        <width>211</width>
         <height>271</height>
        </rect>
       </property>
@@ -540,25 +567,12 @@
        <string>Avalible Restaurants</string>
       </property>
      </widget>
-     <widget class="QLabel" name="label_2">
-      <property name="geometry">
-       <rect>
-        <x>170</x>
-        <y>10</y>
-        <width>91</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Restaurants In Plan</string>
-      </property>
-     </widget>
      <widget class="QPushButton" name="AddRestPlanButton">
       <property name="geometry">
        <rect>
         <x>10</x>
         <y>320</y>
-        <width>201</width>
+        <width>151</width>
         <height>71</height>
        </rect>
       </property>
@@ -569,9 +583,9 @@
      <widget class="QPushButton" name="removeRestaurantPlanButton">
       <property name="geometry">
        <rect>
-        <x>250</x>
+        <x>170</x>
         <y>320</y>
-        <width>101</width>
+        <width>141</width>
         <height>71</height>
        </rect>
       </property>
@@ -581,55 +595,45 @@ Restaurant
 From Plan</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="editMenuItemButton">
+     <widget class="QPushButton" name="savePlanButton">
       <property name="geometry">
        <rect>
-        <x>360</x>
+        <x>320</x>
         <y>320</y>
-        <width>101</width>
+        <width>151</width>
         <height>71</height>
        </rect>
       </property>
       <property name="text">
-       <string>Edit Menu</string>
-      </property>
-     </widget>
-     <widget class="QListWidget" name="menuItemsInPlan_listWidget">
-      <property name="geometry">
-       <rect>
-        <x>320</x>
-        <y>40</y>
-        <width>151</width>
-        <height>271</height>
-       </rect>
+       <string>Save Plan</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_4">
       <property name="geometry">
        <rect>
-        <x>320</x>
+        <x>260</x>
         <y>10</y>
         <width>141</width>
         <height>21</height>
        </rect>
       </property>
       <property name="text">
-       <string>Menu Items</string>
+       <string>Restaurants In Plan</string>
       </property>
      </widget>
     </widget>
     <widget class="QWidget" name="viewPlansPage">
-     <widget class="QPushButton" name="loadPlan_button">
+     <widget class="QPushButton" name="editPlan_button">
       <property name="geometry">
        <rect>
-        <x>180</x>
+        <x>140</x>
         <y>20</y>
-        <width>131</width>
+        <width>101</width>
         <height>51</height>
        </rect>
       </property>
       <property name="text">
-       <string>Load Plan</string>
+       <string>Edit Plan</string>
       </property>
      </widget>
      <widget class="QPushButton" name="deletePlan_button">
@@ -637,7 +641,7 @@ From Plan</string>
        <rect>
         <x>40</x>
         <y>20</y>
-        <width>131</width>
+        <width>91</width>
         <height>51</height>
        </rect>
       </property>
@@ -645,17 +649,17 @@ From Plan</string>
        <string>Delete Plan</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="editPlan_button">
+     <widget class="QPushButton" name="trip_button">
       <property name="geometry">
        <rect>
-        <x>320</x>
+        <x>360</x>
         <y>20</y>
-        <width>131</width>
+        <width>91</width>
         <height>51</height>
        </rect>
       </property>
       <property name="text">
-       <string>Edit Plan</string>
+       <string>Go On Trip!</string>
       </property>
      </widget>
      <widget class="QListWidget" name="listWidget">
@@ -666,6 +670,19 @@ From Plan</string>
         <width>411</width>
         <height>281</height>
        </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="loadPlan_button">
+      <property name="geometry">
+       <rect>
+        <x>250</x>
+        <y>20</y>
+        <width>101</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Load Plan</string>
       </property>
      </widget>
     </widget>
@@ -751,9 +768,9 @@ From Plan</string>
      <widget class="QLabel" name="label_RemovePrompt">
       <property name="geometry">
        <rect>
-        <x>40</x>
+        <x>20</x>
         <y>10</y>
-        <width>401</width>
+        <width>431</width>
         <height>20</height>
        </rect>
       </property>
@@ -972,6 +989,15 @@ From Plan</string>
          </color>
         </brush>
        </colorrole>
+       <colorrole role="PlaceholderText">
+        <brush brushstyle="NoBrush">
+         <color alpha="128">
+          <red>255</red>
+          <green>255</green>
+          <blue>255</blue>
+         </color>
+        </brush>
+       </colorrole>
       </active>
       <inactive>
        <colorrole role="WindowText">
@@ -1109,6 +1135,15 @@ From Plan</string>
          </color>
         </brush>
        </colorrole>
+       <colorrole role="PlaceholderText">
+        <brush brushstyle="NoBrush">
+         <color alpha="128">
+          <red>255</red>
+          <green>255</green>
+          <blue>255</blue>
+         </color>
+        </brush>
+       </colorrole>
       </inactive>
       <disabled>
        <colorrole role="WindowText">
@@ -1243,6 +1278,15 @@ From Plan</string>
           <red>0</red>
           <green>0</green>
           <blue>0</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="PlaceholderText">
+        <brush brushstyle="NoBrush">
+         <color alpha="128">
+          <red>255</red>
+          <green>255</green>
+          <blue>255</blue>
          </color>
         </brush>
        </colorrole>
@@ -1841,7 +1885,7 @@ Screen</string>
      <x>0</x>
      <y>0</y>
      <width>610</width>
-     <height>19</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>

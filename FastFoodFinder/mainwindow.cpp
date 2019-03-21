@@ -401,3 +401,9 @@ list<Restaurant> MainWindow::getRestaurantList()
 
 
 
+
+void MainWindow::on_viewMenuButton_clicked()
+{
+    menu = ;
+
+}
