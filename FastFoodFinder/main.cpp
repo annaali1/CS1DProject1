@@ -16,6 +16,7 @@ int main(int argc, char *argv[])
     //Declare a main window
     MainWindow w;
 
+
     //Pass the main window to the login screen class
     Login log(&w);
 

@@ -1,6 +1,6 @@
 #pragma once
 #include "accountType.hpp"
-#include<QMainWindow>
+#include <QMainWindow>
 #include <QMessageBox>
 #include <QListWidget>
 #include <QFileDialog>
@@ -31,7 +31,9 @@ class MainWindow : public QMainWindow
         void on_ListButton_clicked();
         void on_PlanTripButton_clicked();
         void on_AddRestButton_clicked();
+        void on_AddRestPlanButton_clicked();
         void on_removeRestaurantButton_clicked();
+        void on_removeRestaurantPlanButton_clicked();
         void on_confirmButton_clicked();
         void on_cancelButton_clicked();
         void on_ViewPlansButton_clicked();
