@@ -539,7 +539,7 @@
        <rect>
         <x>10</x>
         <y>40</y>
-        <width>201</width>
+        <width>151</width>
         <height>271</height>
        </rect>
       </property>
@@ -549,7 +549,7 @@
        <rect>
         <x>260</x>
         <y>40</y>
-        <width>211</width>
+        <width>141</width>
         <height>271</height>
        </rect>
       </property>
@@ -619,6 +619,29 @@ From Plan</string>
       </property>
       <property name="text">
        <string>Restaurants In Plan</string>
+      </property>
+     </widget>
+     <widget class="QListWidget" name="menuItemsInPlan_listWidget">
+      <property name="geometry">
+       <rect>
+        <x>320</x>
+        <y>40</y>
+        <width>151</width>
+        <height>271</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_4">
+      <property name="geometry">
+       <rect>
+        <x>320</x>
+        <y>10</y>
+        <width>141</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Menu Items</string>
       </property>
      </widget>
     </widget>
