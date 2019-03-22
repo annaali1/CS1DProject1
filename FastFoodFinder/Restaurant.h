@@ -3,7 +3,6 @@
 #include <algorithm>
 #include <fstream>
 #include <vector>
-#include <queue>
 #include <sstream>
 #include <QString>
 #include <string>
@@ -13,6 +12,7 @@ struct menu
 {
     string name;
     double price;
+    int quantity;
 };
 
 class Restaurant
@@ -34,6 +34,8 @@ class Restaurant
         string getrName();
         double getsDistance();
         int getId();
+        vector<double> getDistances();
+        vector<menu> getMenu();
         bool IsEmpty();
         void addMenu();//*********************
         void deleteMenu();//*************
@@ -44,4 +46,7 @@ class Restaurant
         void setDistances(vector<double> distanceVec);
         void setNumberMenuItems(int menuItems);
         void setMenuItems(vector<menu> newMenues);
+        void output(list<Restaurant> restaurantList);
+        void addDistances(list<Restaurant> &r1, Restaurant* temp);
+        //int getCounter();
 };

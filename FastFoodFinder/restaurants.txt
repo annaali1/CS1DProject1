@@ -1,3 +1,4 @@
+10
 Name of Fast Food restaurant: MacDonald's
 Fast Food restaurant number 1
 
@@ -11,7 +12,7 @@ Fast Food restaurant number 1
  6.9
  8.56
  3.5
-8 miles to Saddleback College 
+8.0 miles to Saddleback College 
 8 menu items
 Big Mac
 3.99

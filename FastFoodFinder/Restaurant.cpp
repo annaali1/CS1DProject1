@@ -116,12 +116,16 @@ list<Restaurant> Restaurant::PopRestaurantList(string file)
     //string file = "C:/Users/lukes/OneDrive/Desktop/CS1DProject1/FastFoodFinder/restaurants.txt";
     ifstream inFile;
     double d = 0.0, doublePrice;
-    string menItems, dist, item, dprice, saddle_distance;
+    string menItems, dist, item, dprice, saddle_distance, stringcounter;
     menu m;
     m.name =  "";
     m.price = 0.0;
 
+    int counter;
+
     inFile.open(file);
+    inFile >> counter;
+    inFile.ignore(1000, '\n');
     while(!inFile.eof()){
         Restaurant *temp = new Restaurant;
         inFile.ignore(1000, 'N');
@@ -142,7 +146,7 @@ list<Restaurant> Restaurant::PopRestaurantList(string file)
         }
         stringstream convertID(temp->stringid);
         convertID >> temp->id;
-        for(int i = 0; i < 10; i++)
+        for(int i = 0; i < counter; i++)
         {
 
             inFile.ignore(1);
@@ -169,7 +173,7 @@ list<Restaurant> Restaurant::PopRestaurantList(string file)
             inFile >> dprice;
             stringstream convertPrice(dprice);
             convertPrice >> doublePrice;
-            m = {item, doublePrice};
+            m = {item, doublePrice, 0};
             temp->menuItems.push_back(m);
         }
         if(inFile.fail())
@@ -180,7 +184,7 @@ list<Restaurant> Restaurant::PopRestaurantList(string file)
     delete temp;
     }
     inFile.close();
-return r1;
+    return r1;
 }
 
 //This method will pop the restaurants from a given file by taking in a string for the filename
@@ -189,15 +193,17 @@ list<Restaurant> Restaurant::PopRestaurantListFromFile(string file)
     list<Restaurant> r1;
     ifstream inFile;
     double d = 0.0, doublePrice;
-    string menItems, dist, item, dprice;
+    string menItems, dist, item, dprice, stringcounter;
     menu m;
     m.name =  "";
     m.price = 0.0;
 
     inFile.open(file);
+    int counter;
+    inFile >> counter;
+    inFile.ignore(100000, '\n');
     while(!inFile.eof()){
         Restaurant *temp = new Restaurant;
-        inFile.ignore(1000, 'N');
         inFile.ignore(1000, ':');
         inFile.ignore(1);
         getline(inFile, temp->rName);
@@ -215,7 +221,7 @@ list<Restaurant> Restaurant::PopRestaurantListFromFile(string file)
         }
         stringstream convertID(temp->stringid);
         convertID >> temp->id;
-        for(int i = 0; i < 10; i++)
+        for(int i = 0; i < counter; i++)
         {
 
             inFile.ignore(1);
@@ -240,7 +246,7 @@ list<Restaurant> Restaurant::PopRestaurantListFromFile(string file)
             inFile >> dprice;
             stringstream convertPrice(dprice);
             convertPrice >> doublePrice;
-            m = {item, doublePrice};
+            m = {item, doublePrice, 0};
             temp->menuItems.push_back(m);
         }
         if(inFile.fail())
@@ -251,8 +257,17 @@ list<Restaurant> Restaurant::PopRestaurantListFromFile(string file)
     delete temp;
     }
     inFile.close();
-return r1;
+    return r1;
 }
+//void Restaurant::addDistances(list<Restaurant> &r1, Restaurant* temp)
+//{
+//        list<Restaurant>::iterator ptr = r1.begin();
+//        for(int i =0; i < temp->id; i++)
+//        {
+//                ptr->distance.push_back(temp->distance[i]);
+//                ptr++;
+//        }
+//}
 
 //void Restaurant::addRestaurant(list<Restaurant> &r1)
 //{
@@ -273,6 +288,7 @@ return r1;
 //            cin >> d;
 //                        temp->distance.push_back(d);
 //        }
+//        temp.addDistances(r1, temp);
 //        cout << "What is the distance from Saddleback?: ";
 //        cin >> temp->sDistance;
 //        cout << "What is the number of menu items?: ";
@@ -325,6 +341,16 @@ int Restaurant::getId()
     return id;
 }
 
+vector<double> Restaurant::getDistances()
+{
+    return distance;
+}
+
+vector<menu> Restaurant::getMenu()
+{
+    return menuItems;
+}
+
 bool Restaurant::IsEmpty()
 {
     return (rName == "");
@@ -357,3 +383,33 @@ void Restaurant::setMenuItems(vector<menu> newMenues)
 {
     menuItems.swap(newMenues);
 }
+
+//void Restaurant::output(list <Restaurant> restaurantList)
+//{
+//    ofstream outFile;
+//    outFile.open("input.txt");
+//    list<Restaurant>::iterator ptr;
+//    for (ptr = restaurantList.begin(); ptr != restaurantList.end(); ++ptr)
+//    {
+//        outFile << ptr->getCounter() << endl;
+//        ptr->counter = 1;
+//        outFile << "Name of Fast Food Restaurant: " << ptr->getrName() << endl;
+//        outFile << "Fast Food restaurant number " << ptr->getID() << endl << endl;
+//        vector<double> dist = ptr->getDistances();
+//        for (int i = 0; i < dist.size(); ++i)
+//        {
+//            outFile << dist[i] << endl;
+//        }
+//        outFile << ptr->getSDistance() << " miles to Saddleback College"<< endl;
+//        outFile << ptr->getNoOfMenuItems() << " menu items" << endl;
+//        vector<menu> mItems = ptr->getMenu();
+//        for (int i = 0; i < mItems.size(); ++i)
+//        {
+//            outFile << mItems[i].name << endl;
+//            outFile << mItems[i].price << endl;
+//        }
+//        ptr->counter++;
+//        outFile << endl;
+//    }
+//    outFile.close();
+//}

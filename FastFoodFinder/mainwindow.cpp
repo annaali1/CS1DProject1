@@ -410,8 +410,16 @@ void MainWindow::on_viewMenuButton_clicked()
         QString restaurant = ui->restaurants_listWidget->selectedItems().first()->text();
 
         ui->restaurantNameMenu->setText(restaurant + "'s Menu");
-        Restaurant temp = searchRestaurant(restaurant);
-        //for(int i = 0; i < temp)
+        Restaurant* temp = searchRestaurant(restaurant);
+
+        vector<menu> tempMenu = temp->getMenu();
+
+        ui->menuViewList->clear();
+
+        for(unsigned int i = 0; i < tempMenu.size(); i++)
+        {
+            ui->menuViewList->addItem(QString::fromStdString(tempMenu[i].name) + " - $" + QString::number(tempMenu[i].price));
+        }
         ui->buttonList->setCurrentWidget(ui->menuList);
     }
 }
@@ -421,21 +429,18 @@ void MainWindow::on_closeMenu_clicked()
     ui->buttonList->setCurrentWidget(ui->restaurantListPage);
 }
 
-Restaurant MainWindow::searchRestaurant(QString searchName)
+Restaurant* MainWindow::searchRestaurant(QString& searchName)
 {
-    Restaurant returned;
-    list<Restaurant>::iterator it = restaurantList.begin();
-    while(it->getrName() != searchName.toStdString() && it != restaurantList.end())
-    {
-        if(it->getrName() == searchName.toStdString())
-        {
-            returned = *it;
-        }
-        else
-        {
-            it++;
-        }
+    Restaurant* returned;
 
+    list<Restaurant>::iterator it;
+    for(it = restaurantList.begin(); it != restaurantList.end(); it++)
+    {
+        returned = &*it;
+        if(returned->getrName() == searchName.toStdString())
+        {
+            return returned;
+        }
     }
-    return returned;
+    return nullptr;
 }

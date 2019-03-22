@@ -51,6 +51,6 @@ private:
         void setupMenusAndWidgets();
         void DisplayRestaurant(QListWidget *list);
         void UpdateRestaurants(QListWidget *list);
-        Restaurant searchRestaurant(QString searchName);
+        Restaurant* searchRestaurant(QString& searchName);
 
 };
