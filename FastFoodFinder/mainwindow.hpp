@@ -40,8 +40,8 @@ class MainWindow : public QMainWindow
         void on_ViewPlansButton_clicked();
         void on_AdminButton_clicked();
         void on_HomeScreenButton_clicked();
-
         void on_viewMenuButton_clicked();
+        void on_closeMenu_clicked();
 
 private:
         Ui::MainWindow *ui;
@@ -51,5 +51,6 @@ private:
         void setupMenusAndWidgets();
         void DisplayRestaurant(QListWidget *list);
         void UpdateRestaurants(QListWidget *list);
+        Restaurant searchRestaurant(QString searchName);
 
 };

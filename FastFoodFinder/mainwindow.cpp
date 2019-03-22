@@ -398,12 +398,44 @@ list<Restaurant> MainWindow::getRestaurantList()
     return restaurantList;
 }
 
-
-
-
-
 void MainWindow::on_viewMenuButton_clicked()
 {
-    //menu = ;
+    if(ui->restaurants_listWidget->selectedItems().count() < 1)
+    {
+        //If not, output an error message
+        QMessageBox::information(this, tr("ERROR"), tr("No restaurants have been selected, please try again!"));
+    }
+    else
+    {
+        QString restaurant = ui->restaurants_listWidget->selectedItems().first()->text();
 
+        ui->restaurantNameMenu->setText(restaurant + "'s Menu");
+        Restaurant temp = searchRestaurant(restaurant);
+        //for(int i = 0; i < temp)
+        ui->buttonList->setCurrentWidget(ui->menuList);
+    }
+}
+
+void MainWindow::on_closeMenu_clicked()
+{
+    ui->buttonList->setCurrentWidget(ui->restaurantListPage);
+}
+
+Restaurant MainWindow::searchRestaurant(QString searchName)
+{
+    Restaurant returned;
+    list<Restaurant>::iterator it = restaurantList.begin();
+    while(it->getrName() != searchName.toStdString() && it != restaurantList.end())
+    {
+        if(it->getrName() == searchName.toStdString())
+        {
+            returned = *it;
+        }
+        else
+        {
+            it++;
+        }
+
+    }
+    return returned;
 }
