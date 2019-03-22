@@ -45,7 +45,6 @@ class MainWindow : public QMainWindow
 
 private:
         Ui::MainWindow *ui;
-
         QString currentFile; // Directory of the file containing restaurants currently loaded into the program
         list<Restaurant> restaurantList;
         // Setup the menus and widgets in the window
