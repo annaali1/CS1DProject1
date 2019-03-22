@@ -3,7 +3,6 @@
 #include <algorithm>
 #include <fstream>
 #include <vector>
-#include <queue>
 #include <sstream>
 #include <QString>
 #include <string>
@@ -26,10 +25,11 @@ class Restaurant
         string stringid;
         int id;
         int NoOfMenuItems;
+        int counter;
     public:
         Restaurant();
         Restaurant(string name);
-        list<Restaurant> PopRestaurantList(string file, int counter = 0);
+        list<Restaurant> PopRestaurantList(string file);
         list<Restaurant> PopRestaurantListFromFile(string filename);
         void editMenu();//******************
         string getrName();
@@ -48,6 +48,5 @@ class Restaurant
         void setNumberMenuItems(int menuItems);
         void setMenuItems(vector<menu> newMenues);
         void output(list<Restaurant> restaurantList);
-        void addDistances(list<Restaurant> &r1, Restaurant* temp);
-        //int getCounter();
+        void addDistances(list<Restaurant> &r1, Restaurant* temp)
 };
