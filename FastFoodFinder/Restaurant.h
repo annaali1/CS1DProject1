@@ -13,6 +13,7 @@ struct menu
 {
     string name;
     double price;
+    int quantity;
 };
 
 class Restaurant
@@ -28,12 +29,14 @@ class Restaurant
     public:
         Restaurant();
         Restaurant(string name);
-        list<Restaurant> PopRestaurantList(string file);
+        list<Restaurant> PopRestaurantList(string file, int counter = 0);
         list<Restaurant> PopRestaurantListFromFile(string filename);
         void editMenu();//******************
         string getrName();
         double getsDistance();
         int getId();
+        vector<double> getDistances();
+        vector<menu> getMenu();
         bool IsEmpty();
         void addMenu();//*********************
         void deleteMenu();//*************
@@ -44,4 +47,7 @@ class Restaurant
         void setDistances(vector<double> distanceVec);
         void setNumberMenuItems(int menuItems);
         void setMenuItems(vector<menu> newMenues);
+        void output(list<Restaurant> restaurantList);
+        void addDistances(list<Restaurant> &r1, Restaurant* temp);
+        //int getCounter();
 };

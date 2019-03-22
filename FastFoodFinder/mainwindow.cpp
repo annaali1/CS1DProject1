@@ -32,7 +32,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //Store the items into our restaurantList
     restaurantList = temp.PopRestaurantList(file.toStdString());
-
+    counter += restaurantList.size();
     //Update both the listWidget for restaurant list and the plan trip widget
     //so that they now display the restaurants
     DisplayRestaurant(ui->restaurants_listWidget);
@@ -63,7 +63,8 @@ void MainWindow::on_ViewPlansButton_clicked()
 //If the Plan Trip button is clicked, the stack widget will move to the plan trip page
 void MainWindow::on_PlanTripButton_clicked()
 {
-    ui->buttonList->setCurrentWidget(ui->planTripPage);
+    ui->buttonList->setCurrentWidget(ui->choosePlanPage
+                                     );
 }
 
 //If the View List button is clicked, the stack widget will move to the restaurant list page
@@ -126,8 +127,8 @@ void MainWindow::on_AddRestButton_clicked()
         list<Restaurant> tempList;
 
         //Set our tempList to the new list using filename
-        tempList = temp.PopRestaurantListFromFile(filename.toStdString());
-
+        tempList = temp.PopRestaurantList(filename.toStdString(), 12);
+        counter += tempList.size();
         //Insert the tempList's contents into our CURRENT restaurantList
         restaurantList.insert(restaurantList.end(), tempList.begin(), tempList.end());
 
@@ -144,10 +145,14 @@ void MainWindow::on_AddRestButton_clicked()
             }
             else
             {
-                ui->restaurants_listWidget_PlanTrip->addItem(QString::fromStdString(it->getrName()));
-                ui->restaurants_listWidget->addItem(QString::fromStdString(it->getrName()));
-                ui->maintenance_listWidget->addItem(QString::fromStdString(it->getrName()));
-                ui->maintenanceR_listWidget->addItem(QString::fromStdString(it->getrName()));
+                ui->restaurants_listWidget_PlanTrip->clear();
+                ui->restaurants_listWidget->clear();
+                ui->maintenance_listWidget->clear();
+                ui->maintenanceR_listWidget->clear();
+                DisplayRestaurant(ui->restaurants_listWidget_PlanTrip);
+                DisplayRestaurant(ui->restaurants_listWidget);
+                DisplayRestaurant(ui->maintenance_listWidget);
+                DisplayRestaurant(ui->maintenanceR_listWidget);
             }
         }
     }
@@ -304,7 +309,7 @@ void MainWindow::on_confirmButton_clicked()
     {
         //Delete the data stored at the iterators location
         restaurantList.erase(it);
-
+        counter--;
         //Output a status complete message
         QMessageBox::information(this,tr("SUCCESS"),
                                  tr("The restaurant was deleted successfully!"));
@@ -398,6 +403,54 @@ list<Restaurant> MainWindow::getRestaurantList()
     return restaurantList;
 }
 
+void MainWindow::on_viewMenuButton_clicked()
+{
+    if(ui->restaurants_listWidget->selectedItems().count() < 1)
+    {
+        //If not, output an error message
+        QMessageBox::information(this, tr("ERROR"), tr("No restaurants have been selected, please try again!"));
+    }
+    else
+    {
+        QString restaurant = ui->restaurants_listWidget->selectedItems().first()->text();
 
+        ui->restaurantNameMenu->setText(restaurant + "'s Menu");
+        Restaurant* temp = searchRestaurant(restaurant);
 
+        vector<menu> tempMenu = temp->getMenu();
 
+        ui->menuViewList->clear();
+
+        for(unsigned int i = 0; i < tempMenu.size(); i++)
+        {
+            ui->menuViewList->addItem(QString::fromStdString(tempMenu[i].name) + " - $" + QString::number(tempMenu[i].price));
+        }
+        ui->buttonList->setCurrentWidget(ui->menuList);
+    }
+}
+
+void MainWindow::on_closeMenu_clicked()
+{
+    ui->buttonList->setCurrentWidget(ui->restaurantListPage);
+}
+
+Restaurant* MainWindow::searchRestaurant(QString& searchName)
+{
+    Restaurant* returned;
+
+    list<Restaurant>::iterator it;
+    for(it = restaurantList.begin(); it != restaurantList.end(); it++)
+    {
+        returned = &*it;
+        if(returned->getrName() == searchName.toStdString())
+        {
+            return returned;
+        }
+    }
+    return nullptr;
+}
+
+void MainWindow::on_customPlanButton_clicked()
+{
+    ui->buttonList->setCurrentWidget(ui->planTripPage);
+}

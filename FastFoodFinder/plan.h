@@ -1,7 +1,7 @@
 #ifndef PLAN_H
 #define PLAN_H
 #include "mainwindow.hpp"
-
+#include <queue>
 
 class Plan
 {
