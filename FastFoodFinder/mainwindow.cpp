@@ -32,7 +32,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //Store the items into our restaurantList
     restaurantList = temp.PopRestaurantList(file.toStdString());
-
+    counter += restaurantList.size();
     //Update both the listWidget for restaurant list and the plan trip widget
     //so that they now display the restaurants
     DisplayRestaurant(ui->restaurants_listWidget);
@@ -126,8 +126,8 @@ void MainWindow::on_AddRestButton_clicked()
         list<Restaurant> tempList;
 
         //Set our tempList to the new list using filename
-        tempList = temp.PopRestaurantList(filename.toStdString(), restaurantList.size());
-
+        tempList = temp.PopRestaurantList(filename.toStdString(), 12);
+        counter += tempList.size();
         //Insert the tempList's contents into our CURRENT restaurantList
         restaurantList.insert(restaurantList.end(), tempList.begin(), tempList.end());
 
@@ -308,7 +308,7 @@ void MainWindow::on_confirmButton_clicked()
     {
         //Delete the data stored at the iterators location
         restaurantList.erase(it);
-
+        counter--;
         //Output a status complete message
         QMessageBox::information(this,tr("SUCCESS"),
                                  tr("The restaurant was deleted successfully!"));

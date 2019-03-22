@@ -52,5 +52,6 @@ private:
         void DisplayRestaurant(QListWidget *list);
         void UpdateRestaurants(QListWidget *list);
         Restaurant* searchRestaurant(QString& searchName);
+        int counter = 0;
 
 };
