@@ -13,6 +13,11 @@
  * and will handle outputting the user interface as
  * well as managing the file variable
  * ***************************************************/
+struct planStruct{
+    string planName;
+    deque<Restaurant> restaurantQueue;
+};
+
 namespace Ui{
     class MainWindow;
 }
@@ -25,6 +30,7 @@ class MainWindow : public QMainWindow
         explicit MainWindow(QWidget *parent = nullptr);
         ~MainWindow();
         list<Restaurant> getRestaurantList();
+        void insertIntoPlan(QListWidget *theList, QString planName);
 
     private slots:
         //These slots will register from the home screen if each push button has been clicked
@@ -43,6 +49,7 @@ class MainWindow : public QMainWindow
         void on_viewMenuButton_clicked();
         void on_closeMenu_clicked();
         void on_customPlanButton_clicked();
+        void on_savePlanButton_clicked();
 
 private:
         Ui::MainWindow *ui;
@@ -54,5 +61,5 @@ private:
         void UpdateRestaurants(QListWidget *list);
         Restaurant* searchRestaurant(QString& searchName);
         int counter = 0;
-
+        list<planStruct> restaurantPlans;
 };
