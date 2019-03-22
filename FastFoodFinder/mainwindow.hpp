@@ -42,6 +42,7 @@ class MainWindow : public QMainWindow
         void on_HomeScreenButton_clicked();
         void on_viewMenuButton_clicked();
         void on_closeMenu_clicked();
+        void on_customPlanButton_clicked();
 
 private:
         Ui::MainWindow *ui;

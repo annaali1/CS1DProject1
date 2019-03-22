@@ -63,7 +63,8 @@ void MainWindow::on_ViewPlansButton_clicked()
 //If the Plan Trip button is clicked, the stack widget will move to the plan trip page
 void MainWindow::on_PlanTripButton_clicked()
 {
-    ui->buttonList->setCurrentWidget(ui->planTripPage);
+    ui->buttonList->setCurrentWidget(ui->choosePlanPage
+                                     );
 }
 
 //If the View List button is clicked, the stack widget will move to the restaurant list page
@@ -447,4 +448,9 @@ Restaurant* MainWindow::searchRestaurant(QString& searchName)
         }
     }
     return nullptr;
+}
+
+void MainWindow::on_customPlanButton_clicked()
+{
+    ui->buttonList->setCurrentWidget(ui->planTripPage);
 }

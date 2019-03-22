@@ -475,7 +475,7 @@
      <number>2</number>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>8</number>
     </property>
     <widget class="QWidget" name="homePage">
      <widget class="QLabel" name="home_label">
@@ -554,7 +554,7 @@
        </rect>
       </property>
      </widget>
-     <widget class="QLabel" name="label">
+     <widget class="QLabel" name="restauransAvalibleLabel">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -608,7 +608,7 @@ From Plan</string>
        <string>Save Plan</string>
       </property>
      </widget>
-     <widget class="QLabel" name="label_4">
+     <widget class="QLabel" name="restaurantsInPlanLabel">
       <property name="geometry">
        <rect>
         <x>260</x>
@@ -619,19 +619,6 @@ From Plan</string>
       </property>
       <property name="text">
        <string>Restaurants In Plan</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_4">
-      <property name="geometry">
-       <rect>
-        <x>320</x>
-        <y>10</y>
-        <width>141</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Menu Items</string>
       </property>
      </widget>
     </widget>
@@ -675,7 +662,7 @@ From Plan</string>
        <string>Go On Trip!</string>
       </property>
      </widget>
-     <widget class="QListWidget" name="listWidget">
+     <widget class="QListWidget" name="loadedPlanList">
       <property name="geometry">
        <rect>
         <x>40</x>
@@ -736,7 +723,7 @@ From Plan</string>
        <string>Remove Restaurants</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton_3">
+     <widget class="QPushButton" name="editMenuButton">
       <property name="geometry">
        <rect>
         <x>40</x>
@@ -749,7 +736,7 @@ From Plan</string>
        <string>Edit Menu Items</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton_4">
+     <widget class="QPushButton" name="addMenuButton">
       <property name="geometry">
        <rect>
         <x>40</x>
@@ -762,7 +749,7 @@ From Plan</string>
        <string>Add Menu Items</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton_5">
+     <widget class="QPushButton" name="removeMenuButton">
       <property name="geometry">
        <rect>
         <x>40</x>
@@ -883,12 +870,83 @@ From Plan</string>
        <rect>
         <x>40</x>
         <y>10</y>
-        <width>201</width>
+        <width>401</width>
         <height>31</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <pointsize>15</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
       <property name="text">
        <string>&lt;Insert RestaurantName&gt; Menu</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="choosePlanPage">
+     <widget class="QPushButton" name="saddlebackPlanButton">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>160</y>
+        <width>141</width>
+        <height>91</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Start Trip
+From Saddleback</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="dominosPlanButton">
+      <property name="geometry">
+       <rect>
+        <x>170</x>
+        <y>160</y>
+        <width>141</width>
+        <height>91</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Start Trip
+From Dominos </string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="customPlanButton">
+      <property name="geometry">
+       <rect>
+        <x>330</x>
+        <y>160</y>
+        <width>141</width>
+        <height>91</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Create
+Custom Plan</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="whatPlanLabel">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>30</y>
+        <width>441</width>
+        <height>101</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>15</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>What kind of plan would you like to make?</string>
       </property>
      </widget>
     </widget>
