@@ -28,7 +28,7 @@ class Restaurant
     public:
         Restaurant();
         Restaurant(string name);
-        list<Restaurant> PopRestaurantList(string file);
+        list<Restaurant> PopRestaurantList(string file, int counter = 0);
         list<Restaurant> PopRestaurantListFromFile(string filename);
         void editMenu();//******************
         string getrName();

@@ -126,7 +126,7 @@ void MainWindow::on_AddRestButton_clicked()
         list<Restaurant> tempList;
 
         //Set our tempList to the new list using filename
-        tempList = temp.PopRestaurantListFromFile(filename.toStdString());
+        tempList = temp.PopRestaurantList(filename.toStdString(), restaurantList.size());
 
         //Insert the tempList's contents into our CURRENT restaurantList
         restaurantList.insert(restaurantList.end(), tempList.begin(), tempList.end());
@@ -144,10 +144,14 @@ void MainWindow::on_AddRestButton_clicked()
             }
             else
             {
-                ui->restaurants_listWidget_PlanTrip->addItem(QString::fromStdString(it->getrName()));
-                ui->restaurants_listWidget->addItem(QString::fromStdString(it->getrName()));
-                ui->maintenance_listWidget->addItem(QString::fromStdString(it->getrName()));
-                ui->maintenanceR_listWidget->addItem(QString::fromStdString(it->getrName()));
+                ui->restaurants_listWidget_PlanTrip->clear();
+                ui->restaurants_listWidget->clear();
+                ui->maintenance_listWidget->clear();
+                ui->maintenanceR_listWidget->clear();
+                DisplayRestaurant(ui->restaurants_listWidget_PlanTrip);
+                DisplayRestaurant(ui->restaurants_listWidget);
+                DisplayRestaurant(ui->maintenance_listWidget);
+                DisplayRestaurant(ui->maintenanceR_listWidget);
             }
         }
     }

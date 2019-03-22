@@ -110,7 +110,7 @@ Restaurant::Restaurant(string name)
 //}
 
 //This method will pop the restaurant list using a file SPECIFIC to the user
-list<Restaurant> Restaurant::PopRestaurantList(string file)
+list<Restaurant> Restaurant::PopRestaurantList(string file, int counter)
 {
     list<Restaurant> r1;
     //string file = "C:/Users/lukes/OneDrive/Desktop/CS1DProject1/FastFoodFinder/restaurants.txt";
@@ -121,10 +121,10 @@ list<Restaurant> Restaurant::PopRestaurantList(string file)
     m.name =  "";
     m.price = 0.0;
 
-    int counter;
-
+    int tempInt;
     inFile.open(file);
-    inFile >> counter;
+    inFile >> tempInt;
+    counter += tempInt;
     inFile.ignore(1000, '\n');
     while(!inFile.eof()){
         Restaurant *temp = new Restaurant;
