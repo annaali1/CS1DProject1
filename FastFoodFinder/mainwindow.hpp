@@ -13,6 +13,11 @@
  * and will handle outputting the user interface as
  * well as managing the file variable
  * ***************************************************/
+struct planStruct{
+    string planName;
+    queue<Restaurant> restaurantQueue;
+};
+
 namespace Ui{
     class MainWindow;
 }
@@ -43,6 +48,8 @@ class MainWindow : public QMainWindow
         void on_viewMenuButton_clicked();
         void on_closeMenu_clicked();
         void on_customPlanButton_clicked();
+        void on_trip_button_clicked();
+        void on_addMenuItemTrip_clicked();
 
 private:
         Ui::MainWindow *ui;
@@ -53,6 +60,8 @@ private:
         void DisplayRestaurant(QListWidget *list);
         void UpdateRestaurants(QListWidget *list);
         Restaurant* searchRestaurant(QString& searchName);
+        int searchMenuItem(QString& searchName, Restaurant& rest);
         int counter = 0;
+        planStruct restaurantPlans;
 
 };

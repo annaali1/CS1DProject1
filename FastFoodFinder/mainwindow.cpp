@@ -415,7 +415,9 @@ void MainWindow::on_viewMenuButton_clicked()
         QString restaurant = ui->restaurants_listWidget->selectedItems().first()->text();
 
         ui->restaurantNameMenu->setText(restaurant + "'s Menu");
-        Restaurant* temp = searchRestaurant(restaurant);
+        Restaurant* temp =
+
+                searchRestaurant(restaurant);
 
         vector<menu> tempMenu = temp->getMenu();
 
@@ -434,6 +436,41 @@ void MainWindow::on_closeMenu_clicked()
     ui->buttonList->setCurrentWidget(ui->restaurantListPage);
 }
 
+void MainWindow::on_customPlanButton_clicked()
+{
+    ui->buttonList->setCurrentWidget(ui->planTripPage);
+}
+
+void MainWindow::on_trip_button_clicked()
+{
+    if(ui->loadedPlanList->selectedItems().count() < 1)
+    {
+        //If not, output an error message
+        QMessageBox::information(this, tr("ERROR"), tr("No restaurants have been selected, please try again!"));
+    }
+    else
+    {
+        QString planName = ui->loadedPlanList->selectedItems().first()->text();
+        ui->takingTripLabel->setText("Taking " + planName + " Trip");
+        ui->buttonList->setCurrentWidget(ui->tripPage);
+    }
+}
+
+void MainWindow::on_addMenuItemTrip_clicked()
+{
+    if(ui->menuTripList->selectedItems().count() < 1)
+    {
+        //If not, output an error message
+        QMessageBox::information(this, tr("ERROR"), tr("No restaurants have been selected, please try again!"));
+    }
+    else
+    {
+        QString menuName = ui->menuTripList->selectedItems().first()->text();
+        menuName = menuName.section('-',1,1);
+        menuName = menuName.trimmed();
+    }
+}
+
 Restaurant* MainWindow::searchRestaurant(QString& searchName)
 {
     Restaurant* returned;
@@ -450,7 +487,17 @@ Restaurant* MainWindow::searchRestaurant(QString& searchName)
     return nullptr;
 }
 
-void MainWindow::on_customPlanButton_clicked()
+// pass the plan
+int MainWindow::searchMenuItem(QString& searchName, Restaurant& rest)
 {
-    ui->buttonList->setCurrentWidget(ui->planTripPage);
+    vector<menu> returned = rest.getMenu();
+
+    for (int i = 0; i < returned.size(); i++)
+    {
+        if(returned[i].name == searchName.toStdString())
+        {
+            return i;
+        }
+    }
+    return -1;
 }
