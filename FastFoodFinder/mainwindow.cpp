@@ -434,6 +434,36 @@ void MainWindow::on_closeMenu_clicked()
     ui->buttonList->setCurrentWidget(ui->restaurantListPage);
 }
 
+void MainWindow::on_savePlanButton_clicked()
+{
+
+    if(ui->restaurantInPlan_listWidget->count() == 0)
+    {
+        //If not, output an error message
+        QMessageBox::information(this, tr("ERROR"), tr("Please add restaurants to your plan!"));
+    }
+    else if(ui->NameOfPlan_lineEdit->text().isEmpty())
+    {
+        //If not, output an error message
+        QMessageBox::information(this, tr("ERROR"), tr("Please enter a name for your plan!"));
+    }
+    else if(ui->restaurantInPlan_listWidget->count() == 0 && ui->NameOfPlan_lineEdit->text().isEmpty())
+    {
+        //If not, output an error message
+        QMessageBox::information(this, tr("ERROR"), tr("Please load restaurants into your plan and enter a restaurant name!"));
+    }
+    else
+    {
+        //Declare a QString for the user's inputted restaurant name
+        QString planName;
+
+        //Set restaurantName equal to the text submitted by the user
+        planName = ui->NameOfPlan_lineEdit->text();
+
+        insertIntoPlan(ui->restaurantInPlan_listWidget, planName);
+    }
+}
+
 Restaurant* MainWindow::searchRestaurant(QString& searchName)
 {
     Restaurant* returned;
@@ -453,4 +483,52 @@ Restaurant* MainWindow::searchRestaurant(QString& searchName)
 void MainWindow::on_customPlanButton_clicked()
 {
     ui->buttonList->setCurrentWidget(ui->planTripPage);
+}
+
+void MainWindow::insertIntoPlan(QListWidget *theList, QString planName)
+{
+    planStruct *temp = new planStruct;
+
+    string theName = planName.toStdString();
+
+    temp->planName = theName;
+
+    //Initialize count and index
+    int count;
+    int index = 0;
+
+    //Count is initialized to the number of restaurants available
+    count = theList->count();
+
+    //Makes sure that we will never add more than we have in the list
+    while(index < count)
+    {
+        QString string = theList->item(index)->text();
+
+
+        for (std::list<Restaurant>::iterator it = restaurantList.begin(); it != restaurantList.end(); it++)
+        {
+            if(it->IsEmpty())
+            {
+                QMessageBox::information(this,tr("The Restaurant is Empty"), tr("some thing went wrong and the item was not saved"));
+                break;
+            }
+
+            if(string.toStdString() == it->getrName())
+            {
+                temp->restaurantQueue.push_back(*it);
+            }
+        }
+        index++;
+    }
+
+    restaurantPlans.push_back(*temp);
+
+    QMessageBox::information(this,tr("SUCCESS"), tr("Plan has been added successfully!"));
+
+    UpdateRestaurants(ui->restaurants_listWidget_PlanTrip);
+
+    ui->restaurantInPlan_listWidget->clear();
+
+    ui->NameOfPlan_lineEdit->clear();
 }
