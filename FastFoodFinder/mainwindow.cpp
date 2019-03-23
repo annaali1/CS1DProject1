@@ -12,6 +12,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+    counter = 0;
     ui->setupUi(this);
 
     //Declare a QPixmap for our open logo
@@ -65,8 +66,7 @@ void MainWindow::on_ViewPlansButton_clicked()
 //If the Plan Trip button is clicked, the stack widget will move to the plan trip page
 void MainWindow::on_PlanTripButton_clicked()
 {
-    ui->buttonList->setCurrentWidget(ui->choosePlanPage
-                                     );
+    ui->buttonList->setCurrentWidget(ui->choosePlanPage);
 }
 
 //If the View List button is clicked, the stack widget will move to the restaurant list page
@@ -474,11 +474,12 @@ void MainWindow::on_trip_button_clicked()
         tempPlan = searchPlan(planName);
         if(tempPlan != nullptr)
         {
+            tempPlanNonPtr = *tempPlan;
             for (std::deque<Restaurant>::iterator it = tempPlan->restaurantQueue.begin(); it != tempPlan->restaurantQueue.end(); it++)
             {
                 ui->tripPlanList->addItem(QString::fromStdString(it->getrName()));
             }
-            ui->takingTripLabel->setText("Taking Plan: " + QString::fromStdString(tempPlan->planName) + " For Trip");
+            ui->takingTripLabel->setText("Taking Plan (" + QString::fromStdString(tempPlan->planName) + ") For Trip");
             ui->buttonList->setCurrentWidget(ui->tripPage);
         }
     }
@@ -497,26 +498,33 @@ void MainWindow::on_addMenuItemTrip_clicked()
         QString restName = ui->restaurantNameTrip->text();
         menuName = menuName.section('-',1,1);
         menuName = menuName.trimmed();
-        restName = restName.section('`',0,1);
+        restName = restName.section('`',0,0);
         restName = restName.trimmed();
         Restaurant *temp = searchRestaurant(restName);
-        int menuIndex = -1;
+        int menuIndex;
         if(temp != nullptr)
         {
             menuIndex = searchMenuItem(menuName, *temp);
         }
-
-        QString planName;
-        planName.fromStdString(tempPlan->planName);
-        planStruct* planTemp = searchPlan(planName);
-        for(int i = 0; i < planTemp->restaurantQueue.size(); i++)
+        if(menuIndex >= 0)
         {
-             if(planTemp->restaurantQueue[i].getrName() == restName.toStdString() && menuIndex > -1)
-             {
-                 planTemp->restaurantQueue[i].setQty(menuIndex, ui->menuQty->value());
-             }
+            QString planName  = QString::fromStdString(tempPlan->planName);
+            planStruct* planTemp = searchPlan(planName);
+            if(planTemp != nullptr)
+            {
+                for(int i = 0; i < planTemp->restaurantQueue.size(); i++)
+                {
+                     if(planTemp->restaurantQueue[i].getrName() == restName.toStdString())
+                     {
+                         planTemp->restaurantQueue[i].setQty(menuIndex, ui->menuQty->value());
+                         QMessageBox::information(this, tr("Menu"), tr("Item has been saved!"));
+                     }
+                     else {
+                         cout << planTemp->restaurantQueue[i].getrName() << endl;
+                     }
+                }
+            }
         }
-
     }
 }
 void MainWindow::on_savePlanButton_clicked()
@@ -544,11 +552,27 @@ void MainWindow::on_savePlanButton_clicked()
         //Set restaurantName equal to the text submitted by the user
         planName = ui->NameOfPlan_lineEdit->text();
 
-        planStruct* tempPlan = searchPlan(planName);
-        vector<int> indexVec = getIndexesFromPlan(tempPlan->restaurantQueue);
-        tempPlan->restaurantQueue = recursiveSort(tempPlan->restaurantQueue,indexVec);
+
+        //vector<int> indexVec = getIndexesFromPlan(tempPlan->restaurantQueue);
+       // tempPlan->restaurantQueue = recursiveSort(tempPlan->restaurantQueue,indexVec);
 
         insertIntoPlan(ui->restaurantInPlan_listWidget, planName);
+//        planStruct* tempPlan = searchPlan(planName);
+//        if (tempPlan != nullptr)
+//        {
+//            vector<int> indexVec = getIndexesFromPlan(tempPlan->restaurantQueue);
+//            for (int i = 0; i < tempPlan->restaurantQueue.size(); i++) {
+//                cout << 0 << " " << tempPlan->restaurantQueue[i].getrName() << endl;
+//            }
+//            recursiveSort(tempPlan->restaurantQueue,indexVec, 0);
+//            for (int i = 0; i < tempPlan->restaurantQueue.size(); ++i)
+//            {
+//                cout << tempPlan->restaurantQueue[i].getrName() << endl;
+//            }
+
+//        }
+
+        QMessageBox::information(this,tr("SUCCESS"), tr("Plan has been added successfully!"));
         ui->loadedPlanList->clear();
         DisplayPlan(ui->loadedPlanList, restaurantPlans);
     }
@@ -640,9 +664,6 @@ void MainWindow::insertIntoPlan(QListWidget *theList, QString planName)
     }
 
     restaurantPlans.push_back(*temp);
-
-    QMessageBox::information(this,tr("SUCCESS"), tr("Plan has been added successfully!"));
-
     UpdateRestaurants(ui->restaurants_listWidget_PlanTrip);
 
     ui->restaurantInPlan_listWidget->clear();
@@ -653,17 +674,19 @@ void MainWindow::insertIntoPlan(QListWidget *theList, QString planName)
 void MainWindow::on_startTrip_clicked()
 {
     ui->tripPlanList->clear();
-    for (std::deque<Restaurant>::iterator it = tempPlan->restaurantQueue.begin(); it != tempPlan->restaurantQueue.end(); it++)
+    for (std::deque<Restaurant>::iterator it = tempPlanNonPtr.restaurantQueue.begin(); it != tempPlanNonPtr.restaurantQueue.end(); it++)
     {
         ui->tripPlanList->addItem(QString::fromStdString(it->getrName()));
     }
 
     Restaurant currentRes;
     vector<menu> currentMenu;
-    ui->startTrip->setText("Continue");
-    if(!tempPlan->restaurantQueue.empty())
+
+    if(!tempPlanNonPtr.restaurantQueue.empty())
     {
-        currentRes = tempPlan->restaurantQueue.at(0);
+        ui->startTrip->setText("Continue");
+
+        currentRes = tempPlanNonPtr.restaurantQueue.at(0);
         currentMenu = currentRes.getMenu();
         ui->menuTripList->clear();
         for (int i = 0; i < currentMenu.size(); i++)
@@ -671,42 +694,41 @@ void MainWindow::on_startTrip_clicked()
             ui->menuTripList->addItem("$" + QString::number(currentMenu[i].price)
                                       + " - " + QString::fromStdString(currentMenu[i].name));
         }
+        tempPlanNonPtr.restaurantQueue.pop_front();
         ui->restaurantNameTrip->setText(QString::fromStdString(currentRes.getrName()) + "`s Menu");
-        tempPlan->restaurantQueue.pop_front();
     }
     else
     {
+        //tempPlanNonPtr.restaurantQueue.pop_front();
+        double totalPlanRev = 0;
+
+        ui->startTrip->setText("Start");
+        ui->menuTripList->clear();
+        ui->finalRevList->clear();
+        for (std::deque<Restaurant>::iterator it = tempPlan->restaurantQueue.begin(); it != tempPlan->restaurantQueue.end(); it++)
+        {
+            totalPlanRev += it->getTotalRev();
+            ui->finalRevList->addItem(QString::fromStdString(it->getrName()) + "'s Revenue - $" + QString::number(it->getTotalRev()));
+        }
+        ui->totalRevLabel->setText("Total Revenue - $" + QString::number(totalPlanRev));
+        ui->totalDistanceLabel->setText("Total Distance - " + QString::number(totalPlanRev) + "miles");
         ui->buttonList->setCurrentWidget(ui->finishedTripPage);
     }
 
 }
 
-deque<Restaurant> MainWindow::recursiveSort(deque<Restaurant> &restaurantsInPlan, vector<int>& indexVec, int index)
+Restaurant MainWindow::recursiveSort(deque<Restaurant>& restaurantsInPlan, vector<int>& indexVec, int index)
 {
     deque<Restaurant> tempDeque = restaurantsInPlan;
     Restaurant tempRes;
     int smallestIndex;
 
-    if(index-1 > 0)
-    {
-        if(index + 1 <= restaurantsInPlan.size())
-        {
-            smallestIndex = smallestDistance(indexVec, restaurantsInPlan[index]);
-            tempRes = restaurantsInPlan[index+1];
-            restaurantsInPlan[index+1] = tempDeque[smallestIndex];
-            tempDeque[smallestIndex] = tempRes;
-            tempDeque.pop_front();
-            indexVec = getIndexesFromPlan(tempDeque);
-            return recursiveSort(tempDeque, indexVec, index++);
-        }
-        else
-        {
-            return restaurantsInPlan;
-        }
+    for (int i = 0; i < restaurantsInPlan.size(); i++) {
+        cout << index << ":" << restaurantsInPlan[i].getrName() << endl;
     }
-    else
-    {
-        return tempDeque;
+
+    for (int i = 0; i < tempDeque.size(); i++) {
+        cout << index << "-" << tempDeque[i].getrName() << endl;
     }
 }
 

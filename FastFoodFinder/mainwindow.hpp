@@ -31,7 +31,7 @@ class MainWindow : public QMainWindow
         ~MainWindow();
         list<Restaurant> getRestaurantList();
         void insertIntoPlan(QListWidget *theList, QString planName);
-        deque<Restaurant> recursiveSort(deque<Restaurant> &restaurantsInPlan, vector<int>& indexVec, int index = 0);
+        Restaurant recursiveSort(deque<Restaurant> &restaurantsInPlan, vector<int>& indexVec, int index = 0);
         vector<int> getIndexesFromPlan(deque<Restaurant> &restaurantsInPlan);
         int smallestDistance(vector<int> indexVec, Restaurant res);
 
@@ -70,7 +70,8 @@ private:
         Restaurant* searchRestaurant(QString& searchName);
         planStruct* searchPlan(QString& searchName);
         int searchMenuItem(QString& searchName, Restaurant& rest);
-        int counter = 0;
+        int counter;
         list<planStruct> restaurantPlans;
         planStruct* tempPlan;
+        planStruct tempPlanNonPtr;
 };

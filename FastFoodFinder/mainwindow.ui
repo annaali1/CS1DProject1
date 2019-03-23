@@ -475,7 +475,7 @@
      <number>2</number>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>10</number>
     </property>
     <widget class="QWidget" name="homePage">
      <widget class="QLabel" name="home_label">
@@ -1148,16 +1148,6 @@ you like?</string>
        <enum>Qt::Horizontal</enum>
       </property>
      </widget>
-     <widget class="QListView" name="finalRevList">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>70</y>
-        <width>461</width>
-        <height>231</height>
-       </rect>
-      </property>
-     </widget>
      <widget class="QLabel" name="finishedTripLabel">
       <property name="geometry">
        <rect>
@@ -1176,6 +1166,16 @@ you like?</string>
       </property>
       <property name="text">
        <string>YOU HAVE FINISHED YOUR TRIP!!!</string>
+      </property>
+     </widget>
+     <widget class="QListWidget" name="finalRevList">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>60</y>
+        <width>461</width>
+        <height>241</height>
+       </rect>
       </property>
      </widget>
     </widget>
