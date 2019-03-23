@@ -38,6 +38,7 @@ class Restaurant
         double getsDistance();
         double getTotalRev();
         int getId();
+        void setQty(int menuIndex, int qty);
         vector<double> getDistances();
         vector<menu> getMenu();
         bool IsEmpty();

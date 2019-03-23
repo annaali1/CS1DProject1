@@ -425,3 +425,8 @@ void Restaurant::setMenuItems(vector<menu> newMenues)
 //    }
 //    outFile.close();
 //}
+
+void Restaurant::setQty(int menuIndex, int qty)
+{
+    this->menuItems[menuIndex].quantity = qty;
+}
