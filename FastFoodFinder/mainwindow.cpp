@@ -13,6 +13,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     counter = 0;
+    addRestCheck = 0;
+    isRemoved = false;
+
     ui->setupUi(this);
 
     //Declare a QPixmap for our open logo
@@ -46,7 +49,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->buttonList->setCurrentWidget(ui->homePage);
 
     ui->restaurants_listWidget_PlanTrip->setSelectionMode(QAbstractItemView::ExtendedSelection);
-
 }
 
 //Default destructor
@@ -70,6 +72,8 @@ void MainWindow::on_PlanTripButton_clicked()
 
 void MainWindow::on_saddlebackPlanButton_clicked()
 {
+    list<planStruct> displayList;
+
     planStruct *temp = new planStruct;
     if (ui->saddlebackPlan_lineEdit->text().isEmpty())
     {
@@ -78,7 +82,7 @@ void MainWindow::on_saddlebackPlanButton_clicked()
     else
     {
         vector<int> restids;
-        if (restaurantList.size() <= 10)
+        if (restaurantList.size() == 10 && isRemoved == false)
         {
             restids.push_back(5);
             restids.push_back(2);
@@ -91,7 +95,7 @@ void MainWindow::on_saddlebackPlanButton_clicked()
             restids.push_back(4);
             restids.push_back(3);
         }
-        else if (restaurantList.size() == 12)
+        else if (restaurantList.size() == 12 && isRemoved == false)
         {
             restids.push_back(5);
             restids.push_back(2);
@@ -106,6 +110,13 @@ void MainWindow::on_saddlebackPlanButton_clicked()
             restids.push_back(4);
             restids.push_back(3);
         }
+        else if(isRemoved == true)
+        {
+            QMessageBox::information(this, tr("ERROR"),
+            tr("Saddleback trip cannot activate if restaurants have been removed from initial list!"));
+            return;
+        }
+
         QString splanName = ui->saddlebackPlan_lineEdit->text();
         temp->planName = splanName.toStdString();
         int index = 0;
@@ -124,12 +135,48 @@ void MainWindow::on_saddlebackPlanButton_clicked()
         }
         temp->startFromSaddleback = true;
         restaurantPlans.push_back(*temp);
-        DisplayPlan(ui->loadedPlanList, restaurantPlans);
+        displayList.push_back(*temp);
+        DisplayPlan(ui->loadedPlanList, displayList);
+        displayList.pop_front();
+        QMessageBox::information(this, tr("SUCCESS"), tr("Saddleback plan created!"));
+
+        foreach(QLineEdit* lEdit, ui->choosePlanPage->findChildren<QLineEdit*>())
+        {
+            lEdit->clear();
+        }
+
     }
 }
 
 void MainWindow::on_dominosPlanButton_clicked()
 {
+    list<planStruct> displayList;
+
+    QString restaurantName;
+
+    restaurantName = "Domino's Pizza";
+
+    std::list<Restaurant>::iterator it2;
+
+    for(it2 = restaurantList.begin(); it2 != restaurantList.end(); it2++)
+    {
+        if(it2->getrName() == restaurantName.toStdString())
+        {
+            break;
+        }
+    }
+
+    if(it2 == restaurantList.end())
+    {
+        QMessageBox::information(this, tr("ERROR"), tr("Domino's Pizza must exist within the list for this trip!"));
+
+        foreach(QLineEdit* lEdit, ui->choosePlanPage->findChildren<QLineEdit*>())
+        {
+            lEdit->clear();
+        }
+        return;
+    }
+
     planStruct *temp = new planStruct;
     if (ui->dominosPlan_lineEdit->text().isEmpty())
     {
@@ -146,7 +193,7 @@ void MainWindow::on_dominosPlanButton_clicked()
     else
     {
         vector<int> restids;
-        if (restaurantList.size() <= 10)
+        if (addRestCheck == 0)
         {
             restids.push_back(4);
             restids.push_back(5);
@@ -158,7 +205,7 @@ void MainWindow::on_dominosPlanButton_clicked()
             restids.push_back(10);
             restids.push_back(1);
         }
-        else if (restaurantList.size() == 12)
+        else if (addRestCheck > 0)
         {
             restids.push_back(4);
             restids.push_back(5);
@@ -186,6 +233,12 @@ void MainWindow::on_dominosPlanButton_clicked()
         int index = 0;
         int plannum = dplannum.toInt();
         list <Restaurant>::iterator ptr;
+
+        if (restids.size() > restaurantList.size() - 1)
+        {
+            plannum = plannum + (restids.size() - (restaurantList.size() - 1));
+            cout << plannum << endl;
+        }
         while (index < plannum)
         {
             ptr = restaurantList.begin();
@@ -195,12 +248,22 @@ void MainWindow::on_dominosPlanButton_clicked()
                {
                    temp->restaurantQueue.push_back(*ptr);
                }
+
             }
+
             ++index;
         }
         temp->startFromSaddleback = false;
         restaurantPlans.push_back(*temp);
-        DisplayPlan(ui->loadedPlanList, restaurantPlans);
+        displayList.push_back(*temp);
+        DisplayPlan(ui->loadedPlanList, displayList);
+        displayList.pop_front();
+        QMessageBox::information(this, tr("SUCCESS"), tr("Dominos plan created!"));
+
+        foreach(QLineEdit* lEdit, ui->choosePlanPage->findChildren<QLineEdit*>())
+        {
+            lEdit->clear();
+        }
     }
 }
 
@@ -290,6 +353,7 @@ void MainWindow::on_AddRestButton_clicked()
                 DisplayRestaurant(ui->restaurants_listWidget);
                 DisplayRestaurant(ui->maintenance_listWidget);
                 DisplayRestaurant(ui->maintenanceR_listWidget);
+                addRestCheck++;
             }
         }
     }
@@ -456,6 +520,8 @@ void MainWindow::on_confirmButton_clicked()
         //Output a status complete message
         QMessageBox::information(this,tr("SUCCESS"),
                                  tr("The restaurant was deleted successfully!"));
+
+        isRemoved = true;
 
         //Delete the input still stored in the lineEdit
         foreach(QLineEdit* lEdit, ui->removeRestaurantPage->findChildren<QLineEdit*>())
