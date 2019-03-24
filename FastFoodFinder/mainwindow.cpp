@@ -816,8 +816,12 @@ void MainWindow::on_addMenuItemTrip_clicked()
     else
     {
         QString menuName = ui->menuTripList->selectedItems().first()->text();
-        QString restName = ui->tripPlanList->currentItem()->text();
-        menuName = menuName.section('-',1,1);
+         cout << menuName.toStdString() << endl;
+         cout << flush;
+        QString restName = ui->restaurantNameTrip->text();
+        cout << restName.toStdString() << endl;
+        cout << flush;
+        menuName = menuName.section('*',1,1);
         menuName = menuName.trimmed();
         restName = restName.section('`',0,0);
         restName = restName.trimmed();
@@ -826,6 +830,10 @@ void MainWindow::on_addMenuItemTrip_clicked()
         if(temp != nullptr)
         {
             menuIndex = searchMenuItem(menuName, *temp);
+        }
+        else
+        {
+            cout << "No Restaurant Found"<< endl;
         }
         if(menuIndex >= 0)
         {
@@ -845,6 +853,14 @@ void MainWindow::on_addMenuItemTrip_clicked()
                      }
                 }
             }
+            else
+            {
+                cout << "No Plan Found"<< endl;
+            }
+        }
+        else
+        {
+            cout << "No Menu Item Found"<< endl;
         }
     }
 }
@@ -1013,7 +1029,7 @@ void MainWindow::on_startTrip_clicked()
         for (unsigned int i = 0; i < currentMenu.size(); i++)
         {
             ui->menuTripList->addItem("$" + QString::number(currentMenu[i].price)
-                                      + " - " + QString::fromStdString(currentMenu[i].name));
+                                      + " * " + QString::fromStdString(currentMenu[i].name));
         }
         tempPlanNonPtr.restaurantQueue.pop_front();
         ui->restaurantNameTrip->setText(QString::fromStdString(currentRes.getrName()) + "`s Menu");
