@@ -148,15 +148,6 @@
        </color>
       </brush>
      </colorrole>
-     <colorrole role="PlaceholderText">
-      <brush brushstyle="NoBrush">
-       <color alpha="128">
-        <red>255</red>
-        <green>255</green>
-        <blue>255</blue>
-       </color>
-      </brush>
-     </colorrole>
     </active>
     <inactive>
      <colorrole role="WindowText">
@@ -291,15 +282,6 @@
         <red>0</red>
         <green>0</green>
         <blue>0</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="PlaceholderText">
-      <brush brushstyle="NoBrush">
-       <color alpha="128">
-        <red>255</red>
-        <green>255</green>
-        <blue>255</blue>
        </color>
       </brush>
      </colorrole>
@@ -440,15 +422,6 @@
        </color>
       </brush>
      </colorrole>
-     <colorrole role="PlaceholderText">
-      <brush brushstyle="NoBrush">
-       <color alpha="128">
-        <red>255</red>
-        <green>255</green>
-        <blue>255</blue>
-       </color>
-      </brush>
-     </colorrole>
     </disabled>
    </palette>
   </property>
@@ -475,7 +448,7 @@
      <number>2</number>
     </property>
     <property name="currentIndex">
-     <number>10</number>
+     <number>8</number>
     </property>
     <widget class="QWidget" name="homePage">
      <widget class="QLabel" name="home_label">
@@ -914,35 +887,35 @@ From Plan</string>
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>160</y>
+        <y>240</y>
         <width>141</width>
         <height>91</height>
        </rect>
       </property>
       <property name="text">
-       <string>Start Trip
+       <string>Save Plan 
 From Saddleback</string>
       </property>
      </widget>
      <widget class="QPushButton" name="dominosPlanButton">
       <property name="geometry">
        <rect>
-        <x>170</x>
-        <y>160</y>
+        <x>160</x>
+        <y>240</y>
         <width>141</width>
         <height>91</height>
        </rect>
       </property>
       <property name="text">
-       <string>Start Trip
+       <string>Save Plan
 From Dominos </string>
       </property>
      </widget>
      <widget class="QPushButton" name="customPlanButton">
       <property name="geometry">
        <rect>
-        <x>330</x>
-        <y>160</y>
+        <x>320</x>
+        <y>240</y>
         <width>141</width>
         <height>91</height>
        </rect>
@@ -956,7 +929,7 @@ Custom Plan</string>
       <property name="geometry">
        <rect>
         <x>20</x>
-        <y>30</y>
+        <y>10</y>
         <width>441</width>
         <height>101</height>
        </rect>
@@ -970,6 +943,87 @@ Custom Plan</string>
       </property>
       <property name="text">
        <string>What kind of plan would you like to make?</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="saddlebackPlan_lineEdit">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>140</y>
+        <width>113</width>
+        <height>25</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="saddlebackPlans_label">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>110</y>
+        <width>131</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Enter the name of 
+your Saddleback plan:</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="dominosPlan_lineEdit">
+      <property name="geometry">
+       <rect>
+        <x>170</x>
+        <y>140</y>
+        <width>113</width>
+        <height>25</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_dominosplan">
+      <property name="geometry">
+       <rect>
+        <x>160</x>
+        <y>110</y>
+        <width>131</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Enter the name of 
+your Domino's plan:</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_dominosplannumber">
+      <property name="geometry">
+       <rect>
+        <x>160</x>
+        <y>170</y>
+        <width>131</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Number of other 
+ restaurants to visit:</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="dominosPlanNumber_lineEdit">
+      <property name="geometry">
+       <rect>
+        <x>170</x>
+        <y>200</y>
+        <width>113</width>
+        <height>25</height>
+       </rect>
       </property>
      </widget>
     </widget>
@@ -1327,15 +1381,6 @@ you like?</string>
          </color>
         </brush>
        </colorrole>
-       <colorrole role="PlaceholderText">
-        <brush brushstyle="NoBrush">
-         <color alpha="128">
-          <red>255</red>
-          <green>255</green>
-          <blue>255</blue>
-         </color>
-        </brush>
-       </colorrole>
       </active>
       <inactive>
        <colorrole role="WindowText">
@@ -1473,15 +1518,6 @@ you like?</string>
          </color>
         </brush>
        </colorrole>
-       <colorrole role="PlaceholderText">
-        <brush brushstyle="NoBrush">
-         <color alpha="128">
-          <red>255</red>
-          <green>255</green>
-          <blue>255</blue>
-         </color>
-        </brush>
-       </colorrole>
       </inactive>
       <disabled>
        <colorrole role="WindowText">
@@ -1616,15 +1652,6 @@ you like?</string>
           <red>0</red>
           <green>0</green>
           <blue>0</blue>
-         </color>
-        </brush>
-       </colorrole>
-       <colorrole role="PlaceholderText">
-        <brush brushstyle="NoBrush">
-         <color alpha="128">
-          <red>255</red>
-          <green>255</green>
-          <blue>255</blue>
          </color>
         </brush>
        </colorrole>
@@ -2223,7 +2250,7 @@ Screen</string>
      <x>0</x>
      <y>0</y>
      <width>610</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
   </widget>
