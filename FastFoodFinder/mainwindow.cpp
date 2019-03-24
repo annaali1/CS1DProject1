@@ -53,7 +53,6 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
-    delete tempPlan;
 }
 
 //If the View Plans button is clicked, the stack widget will move to the view plans page
@@ -242,6 +241,12 @@ void MainWindow::on_removeRestaurantButton_clicked()
 
 }
 
+//Moves page to the edit menu page
+void MainWindow::on_editMenuButton_clicked()
+{
+    ui->buttonList->setCurrentWidget(ui->editMenuItemPage);
+}
+
 //This method removes the restaurant from the 'current restaurants in plan' widget
 void MainWindow::on_removeRestaurantPlanButton_clicked()
 {
@@ -355,6 +360,188 @@ void MainWindow::on_cancelButton_clicked()
     }
     ui->buttonList->setCurrentWidget(ui->homePage);
 }
+
+//Moves the widget to the add menu page
+void MainWindow::on_addMenuButton_clicked()
+{
+    ui->buttonList->setCurrentWidget(ui->addMenuItemPage);
+}
+
+//Moves widget to the remove menu page
+void MainWindow::on_removeMenuButton_clicked()
+{
+    ui->buttonList->setCurrentWidget(ui->removeMenuItemPage);
+}
+
+
+//If user clicks cancel, it will clear the input and return to home page
+void MainWindow::on_cancelRemoveButton_clicked()
+{
+    foreach(QLineEdit* lEdit, ui->removeMenuItemPage->findChildren<QLineEdit*>())
+    {
+        lEdit->clear();
+    }
+    ui->buttonList->setCurrentWidget(ui->homePage);
+}
+
+//If confirm is hit, it will remove the desired menu item
+void MainWindow::on_confirmRemoveButton_clicked()
+{
+    //Loads the restaurant name
+    QString restaurantName = ui->adminRestaurantNameR->text();
+
+    //Makes sure that the restaurant exists in the list first
+    std::list<Restaurant>::iterator it;
+
+    for(it = restaurantList.begin(); it != restaurantList.end(); it++)
+    {
+        if(it->getrName() == restaurantName.toStdString())
+        {
+            break;
+        }
+    }
+
+    if(it != restaurantList.end())
+    {
+        int index = 0;
+
+        //If it does exist it will obtain the menu item name
+        QString menuItemName = ui->adminMenuItemNameR->text();
+
+        //Will return index 0 if the menu item could not be placed, or 1 if it was
+        index = it->deleteMenu(menuItemName.toStdString());
+
+        //If index was zero, output an error message or output a success message
+        if(index == 0)
+        {
+            QMessageBox::information(this,tr("ERROR"), tr("Menu Item does not exist, please enter valid item!"));
+            foreach(QLineEdit* lEdit, ui->addMenuItemPage->findChildren<QLineEdit*>())
+            {
+                lEdit->clear();
+            }
+        }
+        else
+        {
+            QMessageBox::information(this,tr("SUCCESS"), tr("Menu Item has been deleted!"));
+            foreach(QLineEdit* lEdit, ui->addMenuItemPage->findChildren<QLineEdit*>())
+            {
+                lEdit->clear();
+            }
+        }
+    }
+    else
+    {
+        QMessageBox::information(this,tr("ERROR"), tr("Restaurant does not exist in list!"));
+        foreach(QLineEdit* lEdit, ui->addMenuItemPage->findChildren<QLineEdit*>())
+        {
+            lEdit->clear();
+        }
+    }
+}
+
+//This method will change the price of a given menu item, it follows the same structure as method onConfirmRemove
+void MainWindow::on_confirmEditButton_clicked()
+{
+    QString restaurantName = ui->editMenuRestName->text();
+
+    std::list<Restaurant>::iterator it;
+
+    for(it = restaurantList.begin(); it != restaurantList.end(); it++)
+    {
+        if(it->getrName() == restaurantName.toStdString())
+        {
+            break;
+        }
+    }
+
+    if(it != restaurantList.end())
+    {
+        int index = 0;
+
+        QString menuItemName = ui->editMenuName->text();
+        QString newPrice = ui->editMenuNewPrice->text();
+
+        index = it->editMenu(menuItemName.toStdString(), newPrice.toDouble());
+
+        if(index == 0)
+        {
+            QMessageBox::information(this,tr("ERROR"), tr("Menu Item does not exist, please enter valid item!"));
+        }
+        else
+        {
+            QMessageBox::information(this,tr("SUCCESS"), tr("Menu Item price has been changed!"));
+            foreach(QLineEdit* lEdit, ui->editMenuItemPage->findChildren<QLineEdit*>())
+            {
+                lEdit->clear();
+            }
+        }
+    }
+    else
+    {
+        QMessageBox::information(this,tr("ERROR"), tr("Restaurant does not exist in list!"));
+    }
+}
+
+//If cancel is clicked it will clear the input and remove
+void MainWindow::on_cancelEditMenuButton_clicked()
+{
+    foreach(QLineEdit* lEdit, ui->editMenuItemPage->findChildren<QLineEdit*>())
+    {
+        lEdit->clear();
+    }
+    ui->buttonList->setCurrentWidget(ui->homePage);
+}
+
+//This will add a menu item to a given restaurant
+void MainWindow::on_adminConfirmMenuButton_clicked()
+{
+    QString restaurantName = ui->adminRestaurantName->text();
+
+    std::list<Restaurant>::iterator it;
+
+    for (it = restaurantList.begin(); it != restaurantList.end(); it++)
+    {
+
+        if(it->getrName() == restaurantName.toStdString())
+        {
+            break;
+        }
+    }
+
+    if(it != restaurantList.end())
+    {
+        QString menuItemName = ui->adminNewMenuItemName->text();
+        QString menuItemPrice = ui->adminMenuItemPrice->text();
+
+        it->addMenu(menuItemName.toStdString(), menuItemPrice.toDouble());
+
+        QMessageBox::information(this,tr("SUCCESS"), tr("Menu Item has been added!"));
+        foreach(QLineEdit* lEdit, ui->addMenuItemPage->findChildren<QLineEdit*>())
+        {
+            lEdit->clear();
+        }
+    }
+    else
+    {
+        QMessageBox::information(this,tr("ERROR"), tr("Cannot add to a non existant restaurant, please enter valid name!"));
+
+        foreach(QLineEdit* lEdit, ui->addMenuItemPage->findChildren<QLineEdit*>())
+        {
+            lEdit->clear();
+        }
+    }
+}
+
+//If cancel is clicked, return to the home page
+void MainWindow::on_adminCancelMenuButton_clicked()
+{
+    foreach(QLineEdit* lEdit, ui->addMenuItemPage->findChildren<QLineEdit*>())
+    {
+        lEdit->clear();
+    }
+    ui->buttonList->setCurrentWidget(ui->homePage);
+}
+
 
 //This method is used in the constructor to display the current restaurant list
 void MainWindow::DisplayRestaurant(QListWidget* list)
@@ -495,7 +682,7 @@ void MainWindow::on_addMenuItemTrip_clicked()
     else
     {
         QString menuName = ui->menuTripList->selectedItems().first()->text();
-        QString restName = ui->restaurantNameTrip->text();
+        QString restName = ui->tripPlanList->currentItem()->text();
         menuName = menuName.section('-',1,1);
         menuName = menuName.trimmed();
         restName = restName.section('`',0,0);
@@ -512,7 +699,7 @@ void MainWindow::on_addMenuItemTrip_clicked()
             planStruct* planTemp = searchPlan(planName);
             if(planTemp != nullptr)
             {
-                for(int i = 0; i < planTemp->restaurantQueue.size(); i++)
+                for(unsigned int i = 0; i < planTemp->restaurantQueue.size(); i++)
                 {
                      if(planTemp->restaurantQueue[i].getrName() == restName.toStdString())
                      {
@@ -616,11 +803,11 @@ int MainWindow::searchMenuItem(QString& searchName, Restaurant& rest)
 {
     vector<menu> returned = rest.getMenu();
 
-    for (int i = 0; i < returned.size(); i++)
+    for (unsigned int i = 0; i < returned.size(); i++)
     {
         if(returned[i].name == searchName.toStdString())
         {
-            return i;
+            return int(i);
         }
     }
     return -1;
@@ -689,7 +876,7 @@ void MainWindow::on_startTrip_clicked()
         currentRes = tempPlanNonPtr.restaurantQueue.at(0);
         currentMenu = currentRes.getMenu();
         ui->menuTripList->clear();
-        for (int i = 0; i < currentMenu.size(); i++)
+        for (unsigned int i = 0; i < currentMenu.size(); i++)
         {
             ui->menuTripList->addItem("$" + QString::number(currentMenu[i].price)
                                       + " - " + QString::fromStdString(currentMenu[i].name));
@@ -717,20 +904,20 @@ void MainWindow::on_startTrip_clicked()
 
 }
 
-Restaurant MainWindow::recursiveSort(deque<Restaurant>& restaurantsInPlan, vector<int>& indexVec, int index)
-{
-    deque<Restaurant> tempDeque = restaurantsInPlan;
-    Restaurant tempRes;
-    int smallestIndex;
+//Restaurant MainWindow::recursiveSort(deque<Restaurant>& restaurantsInPlan, vector<int>& indexVec, int index)
+//{
+//    deque<Restaurant> tempDeque = restaurantsInPlan;
+//    Restaurant tempRes;
+//    int smallestIndex;
 
-    for (int i = 0; i < restaurantsInPlan.size(); i++) {
-        cout << index << ":" << restaurantsInPlan[i].getrName() << endl;
-    }
+//    for (int i = 0; i < restaurantsInPlan.size(); i++) {
+//        cout << index << ":" << restaurantsInPlan[i].getrName() << endl;
+//    }
 
-    for (int i = 0; i < tempDeque.size(); i++) {
-        cout << index << "-" << tempDeque[i].getrName() << endl;
-    }
-}
+//    for (int i = 0; i < tempDeque.size(); i++) {
+//        cout << index << "-" << tempDeque[i].getrName() << endl;
+//    }
+//}
 
 vector<int> MainWindow::getIndexesFromPlan(deque<Restaurant> &restaurantsInPlan)
 {
@@ -749,7 +936,7 @@ int MainWindow::smallestDistance(vector<int> indexVec, Restaurant res)
 {
     vector<double> tempVec = res.getDistances();
     int smallest = indexVec[1];
-    for (int i = 1; i < indexVec.size(); i++)
+    for (unsigned int i = 1; i < indexVec.size(); i++)
     {
         if(tempVec[smallest] >= tempVec[indexVec[i]])
         {
