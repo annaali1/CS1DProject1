@@ -16,6 +16,7 @@
 struct planStruct{
     string planName;
     deque<Restaurant> restaurantQueue;
+    bool startFromSaddleback;
 };
 
 namespace Ui{
@@ -34,6 +35,7 @@ class MainWindow : public QMainWindow
         Restaurant recursiveSort(deque<Restaurant> &restaurantsInPlan, vector<int>& indexVec, int index = 0);
         vector<int> getIndexesFromPlan(deque<Restaurant> &restaurantsInPlan);
         int smallestDistance(vector<int> indexVec, Restaurant res);
+        double totalDistanceTraveled(deque<Restaurant>& resDeque, bool startFromSaddleback);
 
     private slots:
         //These slots will register from the home screen if each push button has been clicked

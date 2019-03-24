@@ -76,13 +76,13 @@ Fast Food restaurant number 3
 5 menu items
 Veggie pizza
 9.99
-Pepperoni pizza 
+Pepperoni pizza
 8.99
 All meat pizza
 12.99
 Cheese pizza
 5.99
-Mushroom and pepperoni pizza 
+Mushroom and pepperoni pizza
 7.99
  
 Name of Fast Food restaurant: KFC
@@ -100,9 +100,9 @@ Fast Food restaurant number 4
  13.2
 7.56 miles to Saddleback College 
 4 menu items
-Three piece original fried chicken  
+Three piece original fried chicken
 6.99
-Bucket of crispy fried chicken  
+Bucket of crispy fried chicken
 13.99
 Mashed potatoes
 5.99
@@ -203,9 +203,9 @@ Fast Food restaurant number 8
  4.7
 12.75 miles to Saddleback College
 4 menu items
-Chicken club salad  
+Chicken club salad
 6.99
-Southwest chicken salad  
+Southwest chicken salad
 7.29
 Grilled chicken salad
 5.99
@@ -252,12 +252,12 @@ Fast Food restaurant number 10
 5 menu items
 Veggie pizza
 4.09
-Pepperoni pizza 
+Pepperoni pizza
 8.99
 All meat pizza
 12.99
 Cheese pizza
 5.99
-Mushroom and pepperoni pizza 
+Mushroom and pepperoni pizza
 6.99
  

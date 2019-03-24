@@ -133,7 +133,7 @@ void MainWindow::on_saddlebackPlanButton_clicked()
             }
             ++index;
         }
-
+        temp->startFromSaddleback = true;
         restaurantPlans.push_back(*temp);
         displayList.push_back(*temp);
         DisplayPlan(ui->loadedPlanList, displayList);
@@ -253,6 +253,7 @@ void MainWindow::on_dominosPlanButton_clicked()
 
             ++index;
         }
+        temp->startFromSaddleback = false;
         restaurantPlans.push_back(*temp);
         displayList.push_back(*temp);
         DisplayPlan(ui->loadedPlanList, displayList);
@@ -883,8 +884,12 @@ void MainWindow::on_addMenuItemTrip_clicked()
     else
     {
         QString menuName = ui->menuTripList->selectedItems().first()->text();
-        QString restName = ui->tripPlanList->currentItem()->text();
-        menuName = menuName.section('-',1,1);
+         cout << menuName.toStdString() << endl;
+         cout << flush;
+        QString restName = ui->restaurantNameTrip->text();
+        cout << restName.toStdString() << endl;
+        cout << flush;
+        menuName = menuName.section('*',1,1);
         menuName = menuName.trimmed();
         restName = restName.section('`',0,0);
         restName = restName.trimmed();
@@ -893,6 +898,10 @@ void MainWindow::on_addMenuItemTrip_clicked()
         if(temp != nullptr)
         {
             menuIndex = searchMenuItem(menuName, *temp);
+        }
+        else
+        {
+            cout << "No Restaurant Found"<< endl;
         }
         if(menuIndex >= 0)
         {
@@ -912,6 +921,14 @@ void MainWindow::on_addMenuItemTrip_clicked()
                      }
                 }
             }
+            else
+            {
+                cout << "No Plan Found"<< endl;
+            }
+        }
+        else
+        {
+            cout << "No Menu Item Found"<< endl;
         }
     }
 }
@@ -1050,7 +1067,7 @@ void MainWindow::insertIntoPlan(QListWidget *theList, QString planName)
         }
         index++;
     }
-
+    temp->startFromSaddleback = false;
     restaurantPlans.push_back(*temp);
     UpdateRestaurants(ui->restaurants_listWidget_PlanTrip);
 
@@ -1080,7 +1097,7 @@ void MainWindow::on_startTrip_clicked()
         for (unsigned int i = 0; i < currentMenu.size(); i++)
         {
             ui->menuTripList->addItem("$" + QString::number(currentMenu[i].price)
-                                      + " - " + QString::fromStdString(currentMenu[i].name));
+                                      + " * " + QString::fromStdString(currentMenu[i].name));
         }
         tempPlanNonPtr.restaurantQueue.pop_front();
         ui->restaurantNameTrip->setText(QString::fromStdString(currentRes.getrName()) + "`s Menu");
@@ -1089,7 +1106,7 @@ void MainWindow::on_startTrip_clicked()
     {
         //tempPlanNonPtr.restaurantQueue.pop_front();
         double totalPlanRev = 0;
-
+        double totalDistance = totalDistanceTraveled(tempPlan->restaurantQueue, tempPlan->startFromSaddleback);
         ui->startTrip->setText("Start");
         ui->menuTripList->clear();
         ui->finalRevList->clear();
@@ -1099,10 +1116,32 @@ void MainWindow::on_startTrip_clicked()
             ui->finalRevList->addItem(QString::fromStdString(it->getrName()) + "'s Revenue - $" + QString::number(it->getTotalRev()));
         }
         ui->totalRevLabel->setText("Total Revenue - $" + QString::number(totalPlanRev));
-        ui->totalDistanceLabel->setText("Total Distance - " + QString::number(totalPlanRev) + "miles");
+        ui->totalDistanceLabel->setText("Total Distance - " + QString::number(totalDistance) + " miles");
         ui->buttonList->setCurrentWidget(ui->finishedTripPage);
     }
 
+}
+
+double MainWindow::totalDistanceTraveled(deque<Restaurant>& resDeque, bool startFromSaddleback)
+{
+    double returned = 0;
+    vector<double> distVec;
+    int restaurantId;
+    if(startFromSaddleback)
+    {
+        returned = resDeque[0].getsDistance();
+    }
+    for (unsigned int i = 0; i < resDeque.size(); i++)
+    {
+        distVec = resDeque[i].getDistances();
+
+        if((i+1) < resDeque.size())
+        {
+            restaurantId = resDeque[i+1].getId();
+            returned += distVec[restaurantId-1];
+        }
+    }
+    return returned;
 }
 
 //Restaurant MainWindow::recursiveSort(deque<Restaurant>& restaurantsInPlan, vector<int>& indexVec, int index)

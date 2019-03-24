@@ -148,6 +148,15 @@
        </color>
       </brush>
      </colorrole>
+     <colorrole role="PlaceholderText">
+      <brush brushstyle="NoBrush">
+       <color alpha="128">
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
+       </color>
+      </brush>
+     </colorrole>
     </active>
     <inactive>
      <colorrole role="WindowText">
@@ -282,6 +291,15 @@
         <red>0</red>
         <green>0</green>
         <blue>0</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="PlaceholderText">
+      <brush brushstyle="NoBrush">
+       <color alpha="128">
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
        </color>
       </brush>
      </colorrole>
@@ -422,6 +440,15 @@
        </color>
       </brush>
      </colorrole>
+     <colorrole role="PlaceholderText">
+      <brush brushstyle="NoBrush">
+       <color alpha="128">
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
+       </color>
+      </brush>
+     </colorrole>
     </disabled>
    </palette>
   </property>
@@ -448,7 +475,7 @@
      <number>2</number>
     </property>
     <property name="currentIndex">
-     <number>8</number>
+     <number>9</number>
     </property>
     <widget class="QWidget" name="homePage">
      <widget class="QLabel" name="home_label">
@@ -1426,22 +1453,23 @@ you like?</string>
        <rect>
         <x>20</x>
         <y>10</y>
-        <width>431</width>
-        <height>31</height>
+        <width>461</width>
+        <height>41</height>
        </rect>
       </property>
       <property name="styleSheet">
        <string notr="true">font: 87 11pt &quot;Arial Black&quot;;</string>
       </property>
       <property name="text">
-       <string>Enter the name of the restaurant for the desired menu items:</string>
+       <string>Enter the name of the restaurant for the desired
+menu items:</string>
       </property>
      </widget>
      <widget class="QLineEdit" name="editMenuRestName">
       <property name="geometry">
        <rect>
         <x>20</x>
-        <y>40</y>
+        <y>50</y>
         <width>201</width>
         <height>20</height>
        </rect>
@@ -1452,7 +1480,7 @@ you like?</string>
        <rect>
         <x>20</x>
         <y>130</y>
-        <width>431</width>
+        <width>421</width>
         <height>31</height>
        </rect>
       </property>
@@ -1674,6 +1702,15 @@ you like?</string>
          </color>
         </brush>
        </colorrole>
+       <colorrole role="PlaceholderText">
+        <brush brushstyle="NoBrush">
+         <color alpha="128">
+          <red>255</red>
+          <green>255</green>
+          <blue>255</blue>
+         </color>
+        </brush>
+       </colorrole>
       </active>
       <inactive>
        <colorrole role="WindowText">
@@ -1811,6 +1848,15 @@ you like?</string>
          </color>
         </brush>
        </colorrole>
+       <colorrole role="PlaceholderText">
+        <brush brushstyle="NoBrush">
+         <color alpha="128">
+          <red>255</red>
+          <green>255</green>
+          <blue>255</blue>
+         </color>
+        </brush>
+       </colorrole>
       </inactive>
       <disabled>
        <colorrole role="WindowText">
@@ -1945,6 +1991,15 @@ you like?</string>
           <red>0</red>
           <green>0</green>
           <blue>0</blue>
+         </color>
+        </brush>
+       </colorrole>
+       <colorrole role="PlaceholderText">
+        <brush brushstyle="NoBrush">
+         <color alpha="128">
+          <red>255</red>
+          <green>255</green>
+          <blue>255</blue>
          </color>
         </brush>
        </colorrole>
@@ -2543,7 +2598,7 @@ Screen</string>
      <x>0</x>
      <y>0</y>
      <width>610</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>
