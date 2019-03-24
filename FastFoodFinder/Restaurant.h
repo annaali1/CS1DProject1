@@ -33,7 +33,7 @@ class Restaurant
         Restaurant(string name);
         list<Restaurant> PopRestaurantList(string file, int counter = 0);
         list<Restaurant> PopRestaurantListFromFile(string filename);
-        void editMenu();//******************
+        int editMenu(string menuItemName, double newPrice);
         string getrName();
         double getsDistance();
         double getTotalRev();
@@ -42,8 +42,8 @@ class Restaurant
         vector<double> getDistances();
         vector<menu> getMenu();
         bool IsEmpty();
-        void addMenu();//*********************
-        void deleteMenu();//*************
+        void addMenu(string menuItemName, double price);
+        int deleteMenu(string menuItemName);
         void addRestaurant(list<Restaurant> &r1); //adds restaurant to list
         void removeRestaurant(list<Restaurant> &r1); //removes restaurant from list
         void setName(string newName);
