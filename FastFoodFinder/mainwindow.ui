@@ -1453,22 +1453,23 @@ you like?</string>
        <rect>
         <x>20</x>
         <y>10</y>
-        <width>431</width>
-        <height>31</height>
+        <width>461</width>
+        <height>41</height>
        </rect>
       </property>
       <property name="styleSheet">
        <string notr="true">font: 87 11pt &quot;Arial Black&quot;;</string>
       </property>
       <property name="text">
-       <string>Enter the name of the restaurant for the desired menu items:</string>
+       <string>Enter the name of the restaurant for the desired
+menu items:</string>
       </property>
      </widget>
      <widget class="QLineEdit" name="editMenuRestName">
       <property name="geometry">
        <rect>
         <x>20</x>
-        <y>40</y>
+        <y>50</y>
         <width>201</width>
         <height>20</height>
        </rect>
@@ -1479,7 +1480,7 @@ you like?</string>
        <rect>
         <x>20</x>
         <y>130</y>
-        <width>431</width>
+        <width>421</width>
         <height>31</height>
        </rect>
       </property>

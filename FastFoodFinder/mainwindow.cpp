@@ -1038,7 +1038,7 @@ void MainWindow::on_startTrip_clicked()
     {
         //tempPlanNonPtr.restaurantQueue.pop_front();
         double totalPlanRev = 0;
-
+        double totalDistance = totalDistanceTraveled(tempPlan->restaurantQueue);
         ui->startTrip->setText("Start");
         ui->menuTripList->clear();
         ui->finalRevList->clear();
@@ -1048,10 +1048,28 @@ void MainWindow::on_startTrip_clicked()
             ui->finalRevList->addItem(QString::fromStdString(it->getrName()) + "'s Revenue - $" + QString::number(it->getTotalRev()));
         }
         ui->totalRevLabel->setText("Total Revenue - $" + QString::number(totalPlanRev));
-        ui->totalDistanceLabel->setText("Total Distance - " + QString::number(totalPlanRev) + "miles");
+        ui->totalDistanceLabel->setText("Total Distance - " + QString::number(totalDistance) + " miles");
         ui->buttonList->setCurrentWidget(ui->finishedTripPage);
     }
 
+}
+
+double MainWindow::totalDistanceTraveled(deque<Restaurant>& resDeque)
+{
+    double returned = resDeque[0].getsDistance();
+    vector<double> distVec;
+    int restaurantId;
+    for (unsigned int i = 0; i < resDeque.size(); i++)
+    {
+        distVec = resDeque[i].getDistances();
+
+        if((i+1) < resDeque.size())
+        {
+            restaurantId = resDeque[i+1].getId();
+            returned += distVec[restaurantId-1];
+        }
+    }
+    return returned;
 }
 
 //Restaurant MainWindow::recursiveSort(deque<Restaurant>& restaurantsInPlan, vector<int>& indexVec, int index)
