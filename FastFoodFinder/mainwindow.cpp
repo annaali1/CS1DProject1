@@ -68,6 +68,140 @@ void MainWindow::on_PlanTripButton_clicked()
     ui->buttonList->setCurrentWidget(ui->choosePlanPage);
 }
 
+void MainWindow::on_saddlebackPlanButton_clicked()
+{
+    planStruct *temp = new planStruct;
+    if (ui->saddlebackPlan_lineEdit->text().isEmpty())
+    {
+        QMessageBox::information(this, tr("ERROR"), tr("Please enter a name for your plan!"));
+    }
+    else
+    {
+        vector<int> restids;
+        if (restaurantList.size() <= 10)
+        {
+            restids.push_back(5);
+            restids.push_back(2);
+            restids.push_back(6);
+            restids.push_back(9);
+            restids.push_back(8);
+            restids.push_back(7);
+            restids.push_back(10);
+            restids.push_back(1);
+            restids.push_back(4);
+            restids.push_back(3);
+        }
+        else if (restaurantList.size() == 12)
+        {
+            restids.push_back(5);
+            restids.push_back(2);
+            restids.push_back(6);
+            restids.push_back(9);
+            restids.push_back(12);
+            restids.push_back(11);
+            restids.push_back(8);
+            restids.push_back(7);
+            restids.push_back(10);
+            restids.push_back(1);
+            restids.push_back(4);
+            restids.push_back(3);
+        }
+        QString splanName = ui->saddlebackPlan_lineEdit->text();
+        temp->planName = splanName.toStdString();
+        int index = 0;
+        list <Restaurant>::iterator ptr;
+        while (index < restids.size())
+        {
+            ptr = restaurantList.begin();
+            for (ptr = restaurantList.begin(); ptr != restaurantList.end(); ++ptr)
+            {
+               if (ptr->getId() == restids[index])
+               {
+                   temp->restaurantQueue.push_back(*ptr);
+               }
+            }
+            ++index;
+        }
+        restaurantPlans.push_back(*temp);
+        DisplayPlan(ui->loadedPlanList, restaurantPlans);
+    }
+}
+
+void MainWindow::on_dominosPlanButton_clicked()
+{
+    planStruct *temp = new planStruct;
+    if (ui->dominosPlan_lineEdit->text().isEmpty())
+    {
+        QMessageBox::information(this, tr("ERROR"), tr("Please enter a name for your plan!"));
+    }
+    else if (ui->dominosPlanNumber_lineEdit->text().isEmpty())
+    {
+        QMessageBox::information(this, tr("ERROR"), tr("Please enter how many other restaurants to visit!"));
+    }
+    else if (ui->dominosPlanNumber_lineEdit->text().toInt() > (restaurantList.size()-1))
+    {
+        QMessageBox::information(this, tr("ERROR"), tr("Please do not enter a number larger than the amount of other restaurants!"));
+    }
+    else
+    {
+        vector<int> restids;
+        if (restaurantList.size() <= 10)
+        {
+            restids.push_back(4);
+            restids.push_back(5);
+            restids.push_back(2);
+            restids.push_back(6);
+            restids.push_back(9);
+            restids.push_back(8);
+            restids.push_back(7);
+            restids.push_back(10);
+            restids.push_back(1);
+        }
+        else if (restaurantList.size() == 12)
+        {
+            restids.push_back(4);
+            restids.push_back(5);
+            restids.push_back(2);
+            restids.push_back(6);
+            restids.push_back(9);
+            restids.push_back(12);
+            restids.push_back(11);
+            restids.push_back(8);
+            restids.push_back(7);
+            restids.push_back(10);
+            restids.push_back(1);
+        }
+        QString dplanName = ui->dominosPlan_lineEdit->text();
+        temp->planName = dplanName.toStdString();
+        list <Restaurant>::iterator it;
+        for (it = restaurantList.begin(); it != restaurantList.end(); ++it)
+        {
+           if (it->getId() == 3)
+           {
+               temp->restaurantQueue.push_back(*it);
+           }
+        }
+        QString dplannum = ui->dominosPlanNumber_lineEdit->text();
+        int index = 0;
+        int plannum = dplannum.toInt();
+        list <Restaurant>::iterator ptr;
+        while (index < plannum)
+        {
+            ptr = restaurantList.begin();
+            for (ptr = restaurantList.begin(); ptr != restaurantList.end(); ++ptr)
+            {
+               if (ptr->getId() == restids[index])
+               {
+                   temp->restaurantQueue.push_back(*ptr);
+               }
+            }
+            ++index;
+        }
+        restaurantPlans.push_back(*temp);
+        DisplayPlan(ui->loadedPlanList, restaurantPlans);
+    }
+}
+
 //If the View List button is clicked, the stack widget will move to the restaurant list page
 void MainWindow::on_ListButton_clicked()
 {

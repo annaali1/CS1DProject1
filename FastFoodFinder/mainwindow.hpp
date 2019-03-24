@@ -55,6 +55,8 @@ class MainWindow : public QMainWindow
         void on_trip_button_clicked();
         void on_addMenuItemTrip_clicked();
         void on_savePlanButton_clicked();
+        void on_saddlebackPlanButton_clicked();
+        void on_dominosPlanButton_clicked();
         void on_addMenuButton_clicked();
         void on_adminConfirmMenuButton_clicked();
         void on_adminCancelMenuButton_clicked();
