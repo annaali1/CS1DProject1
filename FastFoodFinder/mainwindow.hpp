@@ -84,4 +84,6 @@ private:
         list<planStruct> restaurantPlans;
         planStruct* tempPlan;
         planStruct tempPlanNonPtr;
+        int addRestCheck;
+        bool isRemoved;
 };
