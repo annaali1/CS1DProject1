@@ -15,99 +15,59 @@ Restaurant::Restaurant(string name)
     sDistance = 0;
 }
 
-//void Restaurant::editMenu()
-//{
-//    string itemname = "";
-//    double newprice = 0.0;
-//    menu mitem;
-//    int check = 0;
-//    cout << " Which menu item would you like to edit? "; // These parts will be implemented in QT***
-//    getline(cin, itemname); 									 //***
-//    cout << endl;										 //***
-//    vector <menu> ::iterator ptr;
-//    for (ptr = menuItems.begin(); ptr != menuItems.end(); ++ptr)
-//    {
-//        mitem = *ptr;
-//        if (mitem.name == itemname)
-//        {
-//            ++check;
-//            break;
-//        }
-//    }
-//    if (check == 0)
-//    {
-//        cout << " Menu item not found. Please make sure you entered the item correctly. " << endl;
-//        return;
-//    }
-//    cout << " What would you like to change the price of " << mitem.name << " to?: ";// These parts will be implemented in QT***
-//    cin >> newprice;															   //***
+int Restaurant::editMenu(string menuItemName, double newPrice)
+{
+    menu mitem;
+    int check = 0;
 
-//    mitem.price = newprice;
-//    *ptr = mitem;
-//    cout << endl;
-//    for (unsigned int i = 0; i < menuItems.size(); ++i)
-//    {
-//        cout << menuItems[i].name << endl;
-//        cout << menuItems[i].price << endl;
-//    }
-//    cout << endl;
-
-//}
-
-//void Restaurant::addMenu()
-//{
-//    string tempname = "";
-//    double tempprice = 0.0;
-//    cout << endl << " What will be the name of the menu item?: ";//***implemented in QT
-//    getline(cin, tempname); //***implemented in QT
-//    cout << endl << " What will be the price of the menu item?: "; //***implemented in QT
-//    cin >> tempprice; //***implemented in QT
-//    menu tempmenu;
-//    tempmenu.name = tempname;
-//    tempmenu.price = tempprice;
-
-//    menuItems.push_back(tempmenu);
+    vector <menu> ::iterator ptr;
+    for (ptr = menuItems.begin(); ptr != menuItems.end(); ++ptr)
+    {
+        mitem = *ptr;
+        if (mitem.name == menuItemName)
+        {
+            ++check;
+            break;
+        }
+    }
 
 
-//    cout << endl;
-//    for (unsigned int i = 0; i < menuItems.size(); ++i)
-//    {
-//        cout << menuItems[i].name << endl;
-//        cout << menuItems[i].price << endl;
-//    }
-//    cout << endl;
-//}
+    if(check > 0)
+    {
+        mitem.price = newPrice;
+        *ptr = mitem;
+    }
 
-//void Restaurant::deleteMenu()
-//{
-//    string tempname = "";
-//    int check = 0;
-//    cout << endl << " What is the name of the menu item you'd like to delete?: ";
-//    getline(cin, tempname);
+    return check;
+}
 
-//    //vector <menu> ::iterator ptr;
-//    for (unsigned int i = 0; i < menuItems.size(); ++i)
-//    {
+void Restaurant::addMenu(string menuItemName, double price)
+{
+    menu tempmenu;
+    tempmenu.name = menuItemName;
+    tempmenu.price = price;
 
-//        if (menuItems[i].name == tempname)
-//        {
-//            menuItems.erase(menuItems.begin()+i);
-//            ++check;
-//            break;
-//        }
-//    }
-//    if (check == 0)
-//    {
-//        cout << " Menu item not found. Please make sure you entered the item correctly. " << endl;
-//    }
-//    cout << endl;
-//    for (unsigned int i = 0; i < menuItems.size(); ++i)
-//    {
-//        cout << menuItems[i].name << endl;
-//        cout << menuItems[i].price << endl;
-//    }
-//    cout << endl;
-//}
+    menuItems.push_back(tempmenu);
+}
+
+int Restaurant::deleteMenu(string menuItemName)
+{
+    int check = 0;
+
+    //vector <menu> ::iterator ptr;
+    for (unsigned int i = 0; i < menuItems.size(); ++i)
+    {
+
+        if (menuItems[i].name == menuItemName)
+        {
+            menuItems.erase(menuItems.begin()+i);
+            ++check;
+            break;
+        }
+    }
+
+    return check;
+}
 
 //This method will pop the restaurant list using a file SPECIFIC to the user
 list<Restaurant> Restaurant::PopRestaurantList(string file, int counter)
