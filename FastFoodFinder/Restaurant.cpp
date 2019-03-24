@@ -324,8 +324,20 @@ list<Restaurant> Restaurant::PopRestaurantListFromFile(string file)
 //    }
 // r1.erase(it);
 //}
+void Restaurant::setTotalRev()
+{
+    totalRev = 0;
+    for(unsigned int i = 0; i < menuItems.size(); i++)
+    {
+        totalRev += menuItems[i].price * menuItems[i].quantity;
+    }
+}
 
-
+double Restaurant::getTotalRev()
+{
+    setTotalRev();
+    return  totalRev;
+}
 string Restaurant::getrName()
 {
    return rName;
@@ -413,3 +425,8 @@ void Restaurant::setMenuItems(vector<menu> newMenues)
 //    }
 //    outFile.close();
 //}
+
+void Restaurant::setQty(int menuIndex, int qty)
+{
+    this->menuItems[menuIndex].quantity = qty;
+}

@@ -31,6 +31,9 @@ class MainWindow : public QMainWindow
         ~MainWindow();
         list<Restaurant> getRestaurantList();
         void insertIntoPlan(QListWidget *theList, QString planName);
+        Restaurant recursiveSort(deque<Restaurant> &restaurantsInPlan, vector<int>& indexVec, int index = 0);
+        vector<int> getIndexesFromPlan(deque<Restaurant> &restaurantsInPlan);
+        int smallestDistance(vector<int> indexVec, Restaurant res);
 
     private slots:
         //These slots will register from the home screen if each push button has been clicked
@@ -49,7 +52,11 @@ class MainWindow : public QMainWindow
         void on_viewMenuButton_clicked();
         void on_closeMenu_clicked();
         void on_customPlanButton_clicked();
+        void on_trip_button_clicked();
+        void on_addMenuItemTrip_clicked();
         void on_savePlanButton_clicked();
+
+        void on_startTrip_clicked();
 
 private:
         Ui::MainWindow *ui;
@@ -58,8 +65,13 @@ private:
         // Setup the menus and widgets in the window
         void setupMenusAndWidgets();
         void DisplayRestaurant(QListWidget *list);
+        void DisplayPlan(QListWidget* list, std::list<planStruct> restaurantList);
         void UpdateRestaurants(QListWidget *list);
         Restaurant* searchRestaurant(QString& searchName);
-        int counter = 0;
+        planStruct* searchPlan(QString& searchName);
+        int searchMenuItem(QString& searchName, Restaurant& rest);
+        int counter;
         list<planStruct> restaurantPlans;
+        planStruct* tempPlan;
+        planStruct tempPlanNonPtr;
 };

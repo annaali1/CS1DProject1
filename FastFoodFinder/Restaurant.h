@@ -13,7 +13,7 @@ struct menu
 {
     string name;
     double price;
-    int quantity;
+    int quantity = 0;
 };
 
 class Restaurant
@@ -26,6 +26,8 @@ class Restaurant
         string stringid;
         int id;
         int NoOfMenuItems;
+        double totalRev;
+        void setTotalRev();
     public:
         Restaurant();
         Restaurant(string name);
@@ -34,7 +36,9 @@ class Restaurant
         void editMenu();//******************
         string getrName();
         double getsDistance();
+        double getTotalRev();
         int getId();
+        void setQty(int menuIndex, int qty);
         vector<double> getDistances();
         vector<menu> getMenu();
         bool IsEmpty();
