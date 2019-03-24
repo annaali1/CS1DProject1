@@ -122,6 +122,7 @@ void MainWindow::on_saddlebackPlanButton_clicked()
             }
             ++index;
         }
+        temp->startFromSaddleback = true;
         restaurantPlans.push_back(*temp);
         DisplayPlan(ui->loadedPlanList, restaurantPlans);
     }
@@ -197,6 +198,7 @@ void MainWindow::on_dominosPlanButton_clicked()
             }
             ++index;
         }
+        temp->startFromSaddleback = false;
         restaurantPlans.push_back(*temp);
         DisplayPlan(ui->loadedPlanList, restaurantPlans);
     }
@@ -999,7 +1001,7 @@ void MainWindow::insertIntoPlan(QListWidget *theList, QString planName)
         }
         index++;
     }
-
+    temp->startFromSaddleback = false;
     restaurantPlans.push_back(*temp);
     UpdateRestaurants(ui->restaurants_listWidget_PlanTrip);
 
@@ -1038,7 +1040,7 @@ void MainWindow::on_startTrip_clicked()
     {
         //tempPlanNonPtr.restaurantQueue.pop_front();
         double totalPlanRev = 0;
-        double totalDistance = totalDistanceTraveled(tempPlan->restaurantQueue);
+        double totalDistance = totalDistanceTraveled(tempPlan->restaurantQueue, tempPlan->startFromSaddleback);
         ui->startTrip->setText("Start");
         ui->menuTripList->clear();
         ui->finalRevList->clear();
@@ -1054,11 +1056,15 @@ void MainWindow::on_startTrip_clicked()
 
 }
 
-double MainWindow::totalDistanceTraveled(deque<Restaurant>& resDeque)
+double MainWindow::totalDistanceTraveled(deque<Restaurant>& resDeque, bool startFromSaddleback)
 {
-    double returned = resDeque[0].getsDistance();
+    double returned = 0;
     vector<double> distVec;
     int restaurantId;
+    if(startFromSaddleback)
+    {
+        returned = resDeque[0].getsDistance();
+    }
     for (unsigned int i = 0; i < resDeque.size(); i++)
     {
         distVec = resDeque[i].getDistances();
